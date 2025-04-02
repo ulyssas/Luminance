@@ -1,0 +1,160 @@
+[gd_scene load_steps=14 format=3 uid="uid://b8e7jmw45nr62"]
+
+[ext_resource type="Script" uid="uid://bypb1sdiirsia" path="res://scenes/game/game_scene.gd" id="1_87uf6"]
+[ext_resource type="Texture2D" uid="uid://ck2m8gpthubqf" path="res://assets/images/game.png" id="1_sul5r"]
+[ext_resource type="Material" uid="uid://bklm14s88glwr" path="res://assets/materials/white.tres" id="2_87uf6"]
+[ext_resource type="Material" uid="uid://bt4lrgtkxswyh" path="res://assets/materials/black.tres" id="2_bdhmt"]
+[ext_resource type="Environment" uid="uid://s3h2fiao72e8" path="res://assets/environments/game_env.tres" id="3_0sr1o"]
+[ext_resource type="Script" uid="uid://bf4r1dju2unyx" path="res://scenes/game/testcube.gd" id="4_5i0tg"]
+[ext_resource type="Script" uid="uid://r61y8fouan1q" path="res://scenes/game/lane_light.gd" id="4_bdhmt"]
+[ext_resource type="PackedScene" uid="uid://yqks22vrlt8w" path="res://scenes/game/control.tscn" id="5_lfrn8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_kelw5"]
+material = ExtResource("2_bdhmt")
+
+[sub_resource type="BoxMesh" id="BoxMesh_2a8rs"]
+material = ExtResource("2_87uf6")
+
+[sub_resource type="Gradient" id="Gradient_5i0tg"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bdhmt"]
+gradient = SubResource("Gradient_5i0tg")
+width = 100
+height = 100
+fill_from = Vector2(1, 0)
+fill_to = Vector2(1, 1)
+repeat = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_lfrn8"]
+
+[node name="GameScene" type="Node"]
+script = ExtResource("1_87uf6")
+
+[node name="3DScene" type="Node3D" parent="."]
+
+[node name="Environment" type="WorldEnvironment" parent="3DScene"]
+environment = ExtResource("3_0sr1o")
+
+[node name="Sun" type="DirectionalLight3D" parent="3DScene"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5, 0)
+
+[node name="Camera" type="Camera3D" parent="3DScene"]
+transform = Transform3D(-1, -7.33189e-08, 4.76139e-08, 0, 0.544639, 0.838671, -8.74228e-08, 0.838671, -0.544639, 0, 2.55, 0.25)
+fov = 100.0
+
+[node name="Objects" type="Node3D" parent="3DScene"]
+
+[node name="Lanes" type="Node3D" parent="3DScene/Objects"]
+
+[node name="Air1" type="MeshInstance3D" parent="3DScene/Objects/Lanes"]
+transform = Transform3D(1.3, 0, 0, 0, 0.2, 0, 0, 0, 30, 2.65, 0, 10)
+mesh = SubResource("BoxMesh_kelw5")
+skeleton = NodePath("../..")
+
+[node name="Lane1" type="MeshInstance3D" parent="3DScene/Objects/Lanes"]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 30, 1.5, 0, 10)
+mesh = SubResource("BoxMesh_kelw5")
+skeleton = NodePath("../..")
+
+[node name="Lane2" type="MeshInstance3D" parent="3DScene/Objects/Lanes"]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 30, 0.5, 0, 10)
+mesh = SubResource("BoxMesh_kelw5")
+skeleton = NodePath("../..")
+
+[node name="Lane3" type="MeshInstance3D" parent="3DScene/Objects/Lanes"]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 30, -0.5, 0, 10)
+mesh = SubResource("BoxMesh_kelw5")
+skeleton = NodePath("../..")
+
+[node name="Lane4" type="MeshInstance3D" parent="3DScene/Objects/Lanes"]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 30, -1.5, 0, 10)
+mesh = SubResource("BoxMesh_kelw5")
+skeleton = NodePath("../..")
+
+[node name="Air2" type="MeshInstance3D" parent="3DScene/Objects/Lanes"]
+transform = Transform3D(1.3, 0, 0, 0, 0.2, 0, 0, 0, 30, -2.65, 0, 10)
+mesh = SubResource("BoxMesh_kelw5")
+skeleton = NodePath("../..")
+
+[node name="Grids" type="Node3D" parent="3DScene/Objects"]
+
+[node name="Sideline1" type="MeshInstance3D" parent="3DScene/Objects/Grids"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 30, 3.3, 0.05, 10)
+mesh = SubResource("BoxMesh_2a8rs")
+skeleton = NodePath("../..")
+
+[node name="Line1" type="MeshInstance3D" parent="3DScene/Objects/Grids"]
+transform = Transform3D(0.05, 0, 0, 0, 0.2, 0, 0, 0, 30, 2, 0.05, 10)
+mesh = SubResource("BoxMesh_2a8rs")
+skeleton = NodePath("../..")
+
+[node name="Line2" type="MeshInstance3D" parent="3DScene/Objects/Grids"]
+transform = Transform3D(0.05, 0, 0, 0, 0.2, 0, 0, 0, 30, 1, 0.05, 10)
+mesh = SubResource("BoxMesh_2a8rs")
+skeleton = NodePath("../..")
+
+[node name="Line3" type="MeshInstance3D" parent="3DScene/Objects/Grids"]
+transform = Transform3D(0.05, 0, 0, 0, 0.2, 0, 0, 0, 30, 0, 0.05, 10)
+mesh = SubResource("BoxMesh_2a8rs")
+skeleton = NodePath("../..")
+
+[node name="Line4" type="MeshInstance3D" parent="3DScene/Objects/Grids"]
+transform = Transform3D(0.05, 0, 0, 0, 0.2, 0, 0, 0, 30, -1, 0.05, 10)
+mesh = SubResource("BoxMesh_2a8rs")
+skeleton = NodePath("../..")
+
+[node name="Line5" type="MeshInstance3D" parent="3DScene/Objects/Grids"]
+transform = Transform3D(0.05, 0, 0, 0, 0.2, 0, 0, 0, 30, -2, 0.05, 10)
+mesh = SubResource("BoxMesh_2a8rs")
+skeleton = NodePath("../..")
+
+[node name="Target" type="MeshInstance3D" parent="3DScene/Objects/Grids"]
+transform = Transform3D(-2.18557e-09, 0, 6.6, 0, 0.2, 0, -0.05, 0, -2.88495e-07, 0, 0.05, 0)
+mesh = SubResource("BoxMesh_2a8rs")
+skeleton = NodePath("../..")
+
+[node name="Sideline2" type="MeshInstance3D" parent="3DScene/Objects/Grids"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 30, -3.3, 0.05, 10)
+mesh = SubResource("BoxMesh_2a8rs")
+skeleton = NodePath("../..")
+
+[node name="LaneLight" type="Node3D" parent="3DScene/Objects"]
+script = ExtResource("4_bdhmt")
+
+[node name="sidelight1" type="Sprite3D" parent="3DScene/Objects/LaneLight"]
+transform = Transform3D(1.3, 0, 0, 0, -6.55671e-08, -1, 0, 1.5, -4.37114e-08, 2.65, 0.13, 0.75)
+texture = SubResource("GradientTexture2D_bdhmt")
+
+[node name="light1" type="Sprite3D" parent="3DScene/Objects/LaneLight"]
+transform = Transform3D(1, 0, 0, 0, -6.55671e-08, -1, 0, 1.5, -4.37114e-08, 1.5, 0.13, 0.75)
+texture = SubResource("GradientTexture2D_bdhmt")
+
+[node name="light2" type="Sprite3D" parent="3DScene/Objects/LaneLight"]
+transform = Transform3D(1, 0, 0, 0, -6.55671e-08, -1, 0, 1.5, -4.37114e-08, 0.5, 0.13, 0.75)
+texture = SubResource("GradientTexture2D_bdhmt")
+
+[node name="light3" type="Sprite3D" parent="3DScene/Objects/LaneLight"]
+transform = Transform3D(1, 0, 0, 0, -6.55671e-08, -1, 0, 1.5, -4.37114e-08, -0.5, 0.13, 0.75)
+texture = SubResource("GradientTexture2D_bdhmt")
+
+[node name="light4" type="Sprite3D" parent="3DScene/Objects/LaneLight"]
+transform = Transform3D(1, 0, 0, 0, -6.55671e-08, -1, 0, 1.5, -4.37114e-08, -1.5, 0.13, 0.75)
+texture = SubResource("GradientTexture2D_bdhmt")
+
+[node name="sidelight2" type="Sprite3D" parent="3DScene/Objects/LaneLight"]
+transform = Transform3D(1.3, 0, 0, 0, -6.55671e-08, -1, 0, 1.5, -4.37114e-08, -2.65, 0.13, 0.75)
+texture = SubResource("GradientTexture2D_bdhmt")
+
+[node name="testcube" type="MeshInstance3D" parent="3DScene/Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
+mesh = SubResource("BoxMesh_lfrn8")
+script = ExtResource("4_5i0tg")
+
+[node name="reference" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(960, 540)
+texture = ExtResource("1_sul5r")
+
+[node name="Control" parent="." instance=ExtResource("5_lfrn8")]

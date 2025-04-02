@@ -1,0 +1,151 @@
+[gd_scene load_steps=16 format=3 uid="uid://64pmmemfbiv3"]
+
+[ext_resource type="Script" uid="uid://de0fic687hdqu" path="res://scenes/welcome/welcome.gd" id="1_cgoi3"]
+[ext_resource type="Script" uid="uid://dbap0gqox0ty1" path="res://addons/markdownlabel/markdownlabel.gd" id="2_4co5k"]
+[ext_resource type="PackedScene" uid="uid://b8e7jmw45nr62" path="res://scenes/game/game.tscn" id="2_r16cy"]
+[ext_resource type="Script" uid="uid://dcx7crs23nf4" path="res://addons/markdownlabel/header_formats/h1_format.gd" id="3_8et4a"]
+[ext_resource type="Script" uid="uid://d0sin64i4v3op" path="res://addons/markdownlabel/header_formats/h2_format.gd" id="4_nyd6i"]
+[ext_resource type="Script" uid="uid://dlok0dv1tq2bf" path="res://addons/markdownlabel/header_formats/h3_format.gd" id="5_3lerr"]
+[ext_resource type="Script" uid="uid://bayuh2vafablg" path="res://addons/markdownlabel/header_formats/h4_format.gd" id="6_18vpa"]
+[ext_resource type="Script" uid="uid://dfr1w7u3jgni3" path="res://addons/markdownlabel/header_formats/h5_format.gd" id="7_lab8k"]
+[ext_resource type="Script" uid="uid://bsi6dexoofpe6" path="res://addons/markdownlabel/header_formats/h6_format.gd" id="8_hxxw2"]
+
+[sub_resource type="Resource" id="Resource_knq72"]
+resource_local_to_scene = true
+script = ExtResource("3_8et4a")
+font_size = 2.285
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_xvdhi"]
+resource_local_to_scene = true
+script = ExtResource("4_nyd6i")
+font_size = 1.714
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_oq4si"]
+resource_local_to_scene = true
+script = ExtResource("5_3lerr")
+font_size = 1.428
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_m4egf"]
+resource_local_to_scene = true
+script = ExtResource("6_18vpa")
+font_size = 1.142
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_pi4e7"]
+resource_local_to_scene = true
+script = ExtResource("7_lab8k")
+font_size = 1.0
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_kuuv8"]
+resource_local_to_scene = true
+script = ExtResource("8_hxxw2")
+font_size = 0.857
+is_bold = false
+is_italic = false
+is_underlined = false
+override_font_color = false
+font_color = Color(1, 1, 1, 1)
+
+[node name="welcome" type="Node"]
+script = ExtResource("1_cgoi3")
+game_scene = ExtResource("2_r16cy")
+
+[node name="welcome_text" type="RichTextLabel" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 110.0
+offset_top = -198.0
+offset_right = -110.0
+offset_bottom = 227.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 39
+bbcode_enabled = true
+text = "[font_size=68]Luminance[/font_size]
+
+Luminance is a rhythm game.
+
+You can add musics in the [b]musics[/b] folder."
+scroll_following = true
+horizontal_alignment = 1
+script = ExtResource("2_4co5k")
+markdown_text = "# Luminance
+
+Luminance is a rhythm game.
+
+You can add musics in the **musics** folder."
+h1 = SubResource("Resource_knq72")
+h2 = SubResource("Resource_xvdhi")
+h3 = SubResource("Resource_oq4si")
+h4 = SubResource("Resource_m4egf")
+h5 = SubResource("Resource_pi4e7")
+h6 = SubResource("Resource_kuuv8")
+metadata/_custom_type_script = "uid://dbap0gqox0ty1"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 598.0
+offset_top = -310.0
+offset_right = -598.0
+offset_bottom = -210.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="spacer2" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="game_open" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Enter the game"
+
+[node name="spacer" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+
+[node name="folder_open" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Open the folder"
+
+[node name="spacer3" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="button_up" from="HBoxContainer/game_open" to="." method="_on_game_open_button_up"]
+[connection signal="button_up" from="HBoxContainer/folder_open" to="." method="_on_folder_open_button_up"]

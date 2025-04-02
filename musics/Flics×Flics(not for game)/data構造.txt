@@ -1,0 +1,13 @@
+String title;
+String texturePath;
+String composer;
+String noteDesigner;
+bool hasKuso;
+int32 priority;
+int32 sabiBegin;
+int32 sabiEnd;
+double velocity;
+0
+0
+0
+//HumenFile.cpp, Line163 "if (a==13)" stop at line 13

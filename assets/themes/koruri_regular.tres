@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bw8thsr5q4qyh"]
+
+[ext_resource type="FontFile" uid="uid://g2m34k2xigoe" path="res://assets/fonts/Koruri/Koruri-Regular.ttf" id="1_8m531"]
+
+[resource]
+default_font = ExtResource("1_8m531")
+default_font_size = 25

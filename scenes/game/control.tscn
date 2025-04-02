@@ -1,0 +1,344 @@
+[gd_scene load_steps=20 format=3 uid="uid://yqks22vrlt8w"]
+
+[ext_resource type="Theme" uid="uid://bw8thsr5q4qyh" path="res://assets/themes/koruri_regular.tres" id="1_c6xsw"]
+[ext_resource type="Script" uid="uid://1u7xgixnkcfk" path="res://scenes/game/script_control/control.gd" id="1_gb6d0"]
+[ext_resource type="StyleBox" uid="uid://cigak3pna5k6n" path="res://assets/themes/round_rect.tres" id="2_ik17t"]
+[ext_resource type="Texture2D" uid="uid://b80qm0omhx3t7" path="res://assets/images/jackets/Clocked.png" id="3_gb6d0"]
+[ext_resource type="Script" uid="uid://b8xklfjt1rhhy" path="res://scenes/game/script_control/fps.gd" id="3_v8rs5"]
+[ext_resource type="Script" uid="uid://cga5p1tmekvf5" path="res://scenes/game/script_control/scroller.gd" id="4_ik17t"]
+[ext_resource type="Theme" uid="uid://chqbd3w2yx3lv" path="res://assets/themes/latego_regular_tight.tres" id="4_ti084"]
+[ext_resource type="Theme" uid="uid://6w2wmpuxuqbm" path="res://assets/themes/koruri_bold.tres" id="5_c8lyd"]
+[ext_resource type="Script" uid="uid://b1mcf62cl22kp" path="res://scenes/game/script_control/music_info.gd" id="5_yvurm"]
+[ext_resource type="StyleBox" uid="uid://bjbfe8qwcb66r" path="res://assets/themes/round_rect_inverted.tres" id="6_v8rs5"]
+[ext_resource type="StyleBox" uid="uid://b1t68e2jrkv2f" path="res://assets/themes/progress_bar.tres" id="7_yvurm"]
+[ext_resource type="StyleBox" uid="uid://cax5a5nhhpcms" path="res://assets/themes/round_rect_transparent.tres" id="8_if1kv"]
+[ext_resource type="Theme" uid="uid://d3sou6vesd0am" path="res://assets/themes/latego_regular.tres" id="9_0ccww"]
+[ext_resource type="Script" uid="uid://crb5tjwbj8sws" path="res://scenes/game/script_control/score.gd" id="9_c8lyd"]
+[ext_resource type="Script" uid="uid://bc56yj1ioerqb" path="res://scenes/game/script_control/pggm.gd" id="13_v8rs5"]
+[ext_resource type="Texture2D" uid="uid://ck2m8gpthubqf" path="res://assets/images/game.png" id="16_if1kv"]
+
+[sub_resource type="Gradient" id="Gradient_if1kv"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0ccww"]
+gradient = SubResource("Gradient_if1kv")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ud7oi"]
+texture = SubResource("GradientTexture2D_0ccww")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gb6d0")
+
+[node name="Gradient" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 275.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ud7oi")
+
+[node name="fps" type="Label" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_right = 52.0
+offset_bottom = 43.0
+theme = ExtResource("1_c6xsw")
+text = "60"
+vertical_alignment = 1
+script = ExtResource("3_v8rs5")
+
+[node name="GameName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 78.0
+offset_right = 374.0
+offset_bottom = 35.0
+theme = ExtResource("1_c6xsw")
+text = "Luminance"
+vertical_alignment = 1
+
+[node name="MusicInfo" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.011
+anchor_top = 0.038
+anchor_right = 0.283
+anchor_bottom = 0.245
+offset_left = 0.879999
+offset_top = -0.0400009
+offset_right = -0.360046
+offset_bottom = 0.399994
+theme_override_styles/panel = ExtResource("2_ik17t")
+script = ExtResource("5_yvurm")
+
+[node name="jacket" type="TextureRect" parent="MusicInfo"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031
+anchor_top = 0.071
+anchor_right = 0.031
+anchor_bottom = 0.071
+offset_left = -0.151001
+offset_top = 0.0959997
+offset_right = 191.849
+offset_bottom = 192.096
+texture = ExtResource("3_gb6d0")
+expand_mode = 4
+
+[node name="music_name" type="Control" parent="MusicInfo"]
+clip_contents = true
+anchors_preset = 0
+offset_left = 225.0
+offset_top = 24.0
+offset_right = 501.0
+offset_bottom = 84.0
+script = ExtResource("4_ik17t")
+
+[node name="name" type="Label" parent="MusicInfo/music_name"]
+layout_mode = 2
+offset_right = 182.0
+offset_bottom = 51.0
+theme = ExtResource("4_ti084")
+text = "Illumina"
+vertical_alignment = 1
+
+[node name="composer" type="Label" parent="MusicInfo"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 94.0
+offset_right = 506.0
+offset_bottom = 146.0
+theme = ExtResource("1_c6xsw")
+theme_override_font_sizes/font_size = 32
+text = "unknown"
+vertical_alignment = 1
+
+[node name="level_name" type="Label" parent="MusicInfo"]
+layout_mode = 0
+offset_left = 233.0
+offset_top = 144.0
+offset_right = 351.0
+offset_bottom = 203.0
+theme = ExtResource("5_c8lyd")
+theme_override_font_sizes/font_size = 42
+text = "easy"
+vertical_alignment = 1
+
+[node name="level_value" type="Label" parent="MusicInfo"]
+layout_mode = 0
+offset_left = 359.0
+offset_top = 134.0
+offset_right = 477.0
+offset_bottom = 212.0
+theme = ExtResource("5_c8lyd")
+theme_override_font_sizes/font_size = 55
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.703
+anchor_top = 0.038
+anchor_right = 0.989
+anchor_bottom = 0.213
+offset_left = -0.76001
+offset_top = -0.0400009
+offset_right = -0.880005
+offset_bottom = -0.0400085
+grow_horizontal = 0
+theme_override_styles/panel = ExtResource("6_v8rs5")
+script = ExtResource("9_c8lyd")
+
+[node name="progress_bar" type="Panel" parent="Score"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.027
+anchor_top = 0.471
+anchor_right = 0.784
+anchor_bottom = 0.878
+offset_left = 7.177
+offset_top = 6.98101
+offset_right = 97.584
+offset_bottom = -6.94199
+grow_horizontal = 0
+theme_override_styles/panel = ExtResource("7_yvurm")
+
+[node name="ClearBar" type="Panel" parent="Score"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.027
+anchor_top = 0.471
+anchor_right = 0.784
+anchor_bottom = 0.878
+offset_left = 0.177
+offset_top = -0.0190048
+offset_right = -0.216003
+offset_bottom = 0.0579834
+grow_horizontal = 0
+theme_override_styles/panel = ExtResource("8_if1kv")
+
+[node name="ScoreBar" type="Panel" parent="Score"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.027
+anchor_top = 0.471
+anchor_right = 0.973
+anchor_bottom = 0.878
+offset_left = 0.177
+offset_top = -0.0189896
+offset_right = 0.822998
+offset_bottom = 0.0580139
+grow_horizontal = 0
+theme_override_styles/panel = ExtResource("8_if1kv")
+
+[node name="Score" type="Label" parent="Score"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 28.0
+offset_right = 198.0
+offset_bottom = 80.0
+theme = ExtResource("9_0ccww")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Score:"
+vertical_alignment = 1
+
+[node name="score_value" type="Label" parent="Score"]
+layout_mode = 0
+offset_left = 226.0
+offset_top = 28.0
+offset_right = 391.0
+offset_bottom = 80.0
+theme = ExtResource("9_0ccww")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "011111"
+vertical_alignment = 1
+
+[node name="PGGM" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.824
+anchor_top = 0.219
+anchor_right = 0.989
+anchor_bottom = 0.453
+offset_left = -0.0800781
+offset_top = -0.52002
+offset_right = -0.880005
+offset_bottom = -0.240021
+grow_horizontal = 0
+theme_override_styles/panel = ExtResource("2_ik17t")
+script = ExtResource("13_v8rs5")
+
+[node name="Perfect" type="Label" parent="PGGM"]
+layout_mode = 0
+offset_left = 29.0001
+offset_top = 21.0
+offset_right = 182.0
+offset_bottom = 73.0
+theme = ExtResource("9_0ccww")
+theme_override_colors/font_color = Color(1, 0.913725, 0.407843, 1)
+theme_override_font_sizes/font_size = 42
+text = "Perfect:"
+vertical_alignment = 1
+
+[node name="perfect_value" type="Label" parent="PGGM"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 21.0
+offset_right = 280.0
+offset_bottom = 73.0
+theme = ExtResource("9_0ccww")
+theme_override_colors/font_color = Color(0.823529, 0.823529, 0.823529, 1)
+theme_override_font_sizes/font_size = 42
+text = "9"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Great" type="Label" parent="PGGM"]
+layout_mode = 0
+offset_left = 29.0001
+offset_top = 74.0
+offset_right = 182.0
+offset_bottom = 126.0
+theme = ExtResource("9_0ccww")
+theme_override_colors/font_color = Color(1, 0.482353, 0.513726, 1)
+theme_override_font_sizes/font_size = 42
+text = "Great:"
+vertical_alignment = 1
+
+[node name="great_value" type="Label" parent="PGGM"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 74.0
+offset_right = 280.0
+offset_bottom = 126.0
+theme = ExtResource("9_0ccww")
+theme_override_colors/font_color = Color(0.823529, 0.823529, 0.823529, 1)
+theme_override_font_sizes/font_size = 42
+text = "99"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Good" type="Label" parent="PGGM"]
+layout_mode = 0
+offset_left = 29.0001
+offset_top = 127.0
+offset_right = 182.0
+offset_bottom = 179.0
+theme = ExtResource("9_0ccww")
+theme_override_colors/font_color = Color(0.407843, 1, 0.996078, 1)
+theme_override_font_sizes/font_size = 42
+text = "Good:"
+vertical_alignment = 1
+
+[node name="good_value" type="Label" parent="PGGM"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 127.0
+offset_right = 280.0
+offset_bottom = 179.0
+theme = ExtResource("9_0ccww")
+theme_override_colors/font_color = Color(0.823529, 0.823529, 0.823529, 1)
+theme_override_font_sizes/font_size = 42
+text = "999"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Miss" type="Label" parent="PGGM"]
+layout_mode = 0
+offset_left = 29.0001
+offset_top = 180.0
+offset_right = 182.0
+offset_bottom = 232.0
+theme = ExtResource("9_0ccww")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 42
+text = "Miss:"
+vertical_alignment = 1
+
+[node name="miss_value" type="Label" parent="PGGM"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 180.0
+offset_right = 280.0
+offset_bottom = 232.0
+theme = ExtResource("9_0ccww")
+theme_override_colors/font_color = Color(0.823529, 0.823529, 0.823529, 1)
+theme_override_font_sizes/font_size = 42
+text = "999"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="reference" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(960, 540)
+texture = ExtResource("16_if1kv")
