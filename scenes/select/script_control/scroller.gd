@@ -6,7 +6,7 @@ extends Control
 var tween: Tween  # Tween の管理用
 var scrolling: bool = false  # フラグ
 var wait_time = 2.0  # スクロール開始前の待機時間（秒）
-var scroll_speed = 0.03  # 1ピクセルあたりのスクロール時間
+var scroll_speed = 0.01  # 1ピクセルあたりのスクロール時間
 
 @export var music_name: String = "":
     set(value):
@@ -59,8 +59,9 @@ func reset_position():
     var font_size: int = name_label.get_theme_font_size("font_size")
     var string_size = font.get_string_size(name_label.text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
     name_label.size.x = string_size.x
-    name_label.position.x = 0
+    name_label.position.x = (self.size.x-name_label.size.x)/2
 
     # サイズをチェックしてスクロール開始
     if name_label.size.x > self.size.x and !scrolling:
+        name_label.position.x = 0
         delay_scroll()

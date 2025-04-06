@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://p6rexl0qlgxw"]
+
+[ext_resource type="Theme" uid="uid://6545ddaa84em" path="res://assets/themes/fonts/roboto_regular.tres" id="1_eppy4"]
+[ext_resource type="Script" uid="uid://ejpgf4u7n18a" path="res://scenes/select/level_view.gd" id="1_lrjpf"]
+[ext_resource type="Theme" uid="uid://dpqo4kc78kqpt" path="res://assets/themes/fonts/roboto_light.tres" id="2_lrjpf"]
+
+[node name="Level" type="VBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+script = ExtResource("1_lrjpf")
+
+[node name="level_name" type="Label" parent="."]
+layout_mode = 2
+theme = ExtResource("1_eppy4")
+theme_override_font_sizes/font_size = 50
+text = "Medium"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="level_value" type="Label" parent="."]
+layout_mode = 2
+theme = ExtResource("2_lrjpf")
+text = "555"
+horizontal_alignment = 1
+vertical_alignment = 1

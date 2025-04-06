@@ -8,14 +8,21 @@ extends Panel
 @export var composer: String = "":
     set(value):
         composer = value
-        $composer.text = composer
+        $composer.composer_name = composer
 
 @export var level_name: String = "":
     set(value):
         level_name = value
-        $level_name.text = level_name
+        $level_disp/level_name.text = level_name
 
 @export var level_value: String = "":
     set(value):
         level_value = value
-        $level_value.text = level_value
+        $level_disp/level_value.text = level_value
+
+@export var jacket_path: String = "":
+    set(value):
+        if value != "":
+            jacket_path = value
+            var image = Image.load_from_file(jacket_path)
+            $jacket.texture = ImageTexture.create_from_image(image)

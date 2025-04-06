@@ -1,16 +1,16 @@
-extends MeshInstance3D
+extends Camera3D
 
 var speed: float = 10.0
 
 func _process(delta):
     var direction = Vector3()
-    if Input.is_action_pressed("ui_up"):
+    if Input.is_key_pressed(KEY_W):
         direction.z += 1
-    if Input.is_action_pressed("ui_down"):
+    if Input.is_key_pressed(KEY_S):
         direction.z -= 1
-    if Input.is_action_pressed("ui_left"):
+    if Input.is_key_pressed(KEY_A):
         direction.x += 1
-    if Input.is_action_pressed("ui_right"):
+    if Input.is_key_pressed(KEY_D):
         direction.x -= 1
     if direction.length() > 0:
         direction = direction.normalized() * speed

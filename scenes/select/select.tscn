@@ -1,0 +1,547 @@
+[gd_scene load_steps=21 format=3 uid="uid://da1e2w2j8f02i"]
+
+[ext_resource type="Script" uid="uid://cuya4bdrtj5qp" path="res://scenes/select/select.gd" id="1_0ktps"]
+[ext_resource type="Texture2D" uid="uid://h28sape61e6o" path="res://assets/images/reference/IlluminasTracks.png" id="1_5vqlq"]
+[ext_resource type="Script" uid="uid://chk8pwdpfh8" path="res://scenes/select/level_select.gd" id="2_bk0it"]
+[ext_resource type="Theme" uid="uid://6545ddaa84em" path="res://assets/themes/fonts/roboto_regular.tres" id="2_fgw6a"]
+[ext_resource type="PackedScene" uid="uid://p6rexl0qlgxw" path="res://scenes/select/level.tscn" id="2_vcnt6"]
+[ext_resource type="Script" uid="uid://b3gpdtll10fpi" path="res://scenes/select/script_control/control.gd" id="3_e4mok"]
+[ext_resource type="Texture2D" uid="uid://kxgu5jepnsfm" path="res://assets/images/arrow.svg" id="3_vcnt6"]
+[ext_resource type="StyleBox" uid="uid://ci86n3cbim3j" path="res://assets/themes/round_rect_black.tres" id="5_vjb3t"]
+[ext_resource type="Script" uid="uid://chtdvbqw36ahc" path="res://scenes/select/script_control/scroller.gd" id="7_e4mok"]
+[ext_resource type="Theme" uid="uid://bw8thsr5q4qyh" path="res://assets/themes/fonts/koruri_regular.tres" id="7_i6xpm"]
+[ext_resource type="Script" uid="uid://dl7grciajpxm0" path="res://scenes/select/script_control/music_info.gd" id="7_o55a0"]
+[ext_resource type="Theme" uid="uid://dpqo4kc78kqpt" path="res://assets/themes/fonts/roboto_light.tres" id="7_r360f"]
+[ext_resource type="Theme" uid="uid://jj50hfastx10" path="res://assets/themes/fonts/koruri_regular_tight.tres" id="10_e4mok"]
+[ext_resource type="Script" uid="uid://s5huwwh3jjkv" path="res://scenes/select/script_control/skipper.gd" id="10_o55a0"]
+[ext_resource type="PackedScene" uid="uid://c64yu3ktoeog" path="res://scenes/select/launcher.tscn" id="12_4gfkc"]
+[ext_resource type="Script" uid="uid://cu8gv3rrh312" path="res://scenes/select/bottom_light.gd" id="14_18xjw"]
+[ext_resource type="Texture2D" uid="uid://clfv5oo5vw1vb" path="res://assets/images/gradient.tres" id="15_4gfkc"]
+
+[sub_resource type="Gradient" id="Gradient_vjb3t"]
+offsets = PackedFloat32Array(0.403302, 1)
+colors = PackedColorArray(0, 0, 0, 0.745098, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0ccww"]
+gradient = SubResource("Gradient_vjb3t")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_054g3"]
+texture = SubResource("GradientTexture2D_0ccww")
+
+[node name="Select" type="Node"]
+script = ExtResource("1_0ktps")
+
+[node name="reference" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_5vqlq")
+centered = false
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_e4mok")
+
+[node name="Title" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 210.0
+grow_horizontal = 2
+theme = ExtResource("7_r360f")
+theme_override_colors/font_outline_color = Color(0.470588, 0.470588, 0.470588, 0.882353)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 110
+text = "Select Tracks"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="selector" parent="Control" instance=ExtResource("12_4gfkc")]
+layout_mode = 1
+offset_left = -320.0
+offset_top = 320.0
+offset_right = -320.0
+offset_bottom = -423.0
+
+[node name="MusicInfo" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.521
+anchor_top = 0.231
+anchor_right = 0.911
+anchor_bottom = 0.602
+offset_left = -0.320068
+offset_top = 0.519989
+offset_right = 0.879883
+offset_bottom = -0.160034
+theme_override_styles/panel = ExtResource("5_vjb3t")
+script = ExtResource("7_o55a0")
+metadata/_edit_use_anchors_ = true
+
+[node name="music_name" type="Control" parent="Control/MusicInfo"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 47.0
+offset_top = 12.0
+offset_right = 705.0
+offset_bottom = 103.0
+script = ExtResource("7_e4mok")
+
+[node name="name" type="Label" parent="Control/MusicInfo/music_name"]
+layout_mode = 2
+anchor_left = 0.499
+anchor_right = 0.499
+offset_left = -167.342
+offset_right = 166.658
+offset_bottom = 91.0
+theme = ExtResource("7_i6xpm")
+theme_override_font_sizes/font_size = 65
+text = "Luminance"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="timer" type="Timer" parent="Control/MusicInfo/music_name"]
+
+[node name="LabelComp" type="Label" parent="Control/MusicInfo"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 100.0
+offset_right = 264.0
+offset_bottom = 160.0
+theme = ExtResource("2_fgw6a")
+theme_override_font_sizes/font_size = 45
+text = "Composer:"
+
+[node name="composer" type="Control" parent="Control/MusicInfo"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 150.0
+offset_right = 722.0
+offset_bottom = 241.0
+script = ExtResource("10_o55a0")
+
+[node name="name" type="Label" parent="Control/MusicInfo/composer"]
+layout_mode = 2
+offset_right = 714.0
+offset_bottom = 91.0
+theme = ExtResource("10_e4mok")
+theme_override_font_sizes/font_size = 55
+text = "unknown_p"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="LabelNote" type="Label" parent="Control/MusicInfo"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 240.0
+offset_right = 341.0
+offset_bottom = 300.0
+theme = ExtResource("2_fgw6a")
+theme_override_font_sizes/font_size = 45
+text = "Note Designer:"
+
+[node name="note_designer" type="Control" parent="Control/MusicInfo"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 290.0
+offset_right = 722.0
+offset_bottom = 381.0
+script = ExtResource("10_o55a0")
+
+[node name="name" type="Label" parent="Control/MusicInfo/note_designer"]
+layout_mode = 2
+offset_right = 714.0
+offset_bottom = 91.0
+theme = ExtResource("10_e4mok")
+theme_override_font_sizes/font_size = 55
+text = "luminance_p"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="LevelSelect" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.719444
+anchor_right = 1.0
+anchor_bottom = 0.942593
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+script = ExtResource("2_bk0it")
+metadata/_edit_use_anchors_ = true
+
+[node name="easy" parent="Control/LevelSelect" instance=ExtResource("2_vcnt6")]
+layout_mode = 2
+level_name = "Easy"
+
+[node name="medium" parent="Control/LevelSelect" instance=ExtResource("2_vcnt6")]
+layout_mode = 2
+level_name = "Medium"
+
+[node name="hard" parent="Control/LevelSelect" instance=ExtResource("2_vcnt6")]
+layout_mode = 2
+level_name = "Hard"
+
+[node name="kuso" parent="Control/LevelSelect" instance=ExtResource("2_vcnt6")]
+layout_mode = 2
+level_name = "Kuso"
+
+[node name="BottomBar" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gradient" type="Panel" parent="Control/BottomBar"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_054g3")
+
+[node name="Light" type="Control" parent="Control/BottomBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("14_18xjw")
+
+[node name="sidelight1" type="TextureRect" parent="Control/BottomBar/Light"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 0.187
+anchor_bottom = 1.0
+offset_top = -60.0
+offset_right = 0.959991
+grow_vertical = 0
+texture = ExtResource("15_4gfkc")
+expand_mode = 1
+
+[node name="light1" type="TextureRect" parent="Control/BottomBar/Light"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.187
+anchor_top = 1.0
+anchor_right = 0.344
+anchor_bottom = 1.0
+offset_left = 0.959991
+offset_top = -60.0
+offset_right = -0.480042
+grow_vertical = 0
+texture = ExtResource("15_4gfkc")
+expand_mode = 1
+
+[node name="light2" type="TextureRect" parent="Control/BottomBar/Light"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.344
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -0.480042
+offset_top = -60.0
+grow_vertical = 0
+texture = ExtResource("15_4gfkc")
+expand_mode = 1
+
+[node name="light3" type="TextureRect" parent="Control/BottomBar/Light"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.656
+anchor_bottom = 1.0
+offset_top = -60.0
+offset_right = 0.47998
+grow_vertical = 0
+texture = ExtResource("15_4gfkc")
+expand_mode = 1
+
+[node name="light4" type="TextureRect" parent="Control/BottomBar/Light"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.656
+anchor_top = 1.0
+anchor_right = 0.812
+anchor_bottom = 1.0
+offset_left = 0.47998
+offset_top = -60.0
+offset_right = 0.959961
+grow_vertical = 0
+texture = ExtResource("15_4gfkc")
+expand_mode = 1
+
+[node name="sidelight2" type="TextureRect" parent="Control/BottomBar/Light"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.812
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.959961
+offset_top = -60.0
+grow_vertical = 0
+texture = ExtResource("15_4gfkc")
+expand_mode = 1
+
+[node name="Outlines" type="Control" parent="Control/BottomBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control/BottomBar/Outlines"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -62.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect2" type="ColorRect" parent="Control/BottomBar/Outlines"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.187
+anchor_top = 1.0
+anchor_right = 0.187
+anchor_bottom = 1.0
+offset_left = -1.04001
+offset_top = -60.0
+offset_right = 2.95999
+grow_vertical = 0
+
+[node name="ColorRect3" type="ColorRect" parent="Control/BottomBar/Outlines"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.344
+anchor_top = 1.0
+anchor_right = 0.344
+anchor_bottom = 1.0
+offset_left = -2.48004
+offset_top = -60.0
+offset_right = 1.51996
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect4" type="ColorRect" parent="Control/BottomBar/Outlines"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -60.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect5" type="ColorRect" parent="Control/BottomBar/Outlines"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.656
+anchor_top = 1.0
+anchor_right = 0.656
+anchor_bottom = 1.0
+offset_left = -1.52002
+offset_top = -60.0
+offset_right = 2.47998
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect6" type="ColorRect" parent="Control/BottomBar/Outlines"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.812
+anchor_top = 1.0
+anchor_right = 0.812
+anchor_bottom = 1.0
+offset_left = -1.04004
+offset_top = -60.0
+offset_right = 2.95996
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="cancel" type="Label" parent="Control/BottomBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.266
+anchor_top = 1.0
+anchor_right = 0.266
+anchor_bottom = 1.0
+offset_left = -150.72
+offset_top = -60.0
+offset_right = 149.28
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_fgw6a")
+text = "Cancel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="options" type="Label" parent="Control/BottomBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.734
+anchor_top = 1.0
+anchor_right = 0.734
+anchor_bottom = 1.0
+offset_left = -149.28
+offset_top = -60.0
+offset_right = 150.72
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_fgw6a")
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="arrow_left" type="TextureRect" parent="Control/BottomBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.422
+anchor_top = 1.0
+anchor_right = 0.422
+anchor_bottom = 1.0
+offset_left = -16.2401
+offset_top = -50.0
+offset_right = 15.7599
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_vcnt6")
+expand_mode = 1
+flip_h = true
+
+[node name="arrow_right" type="TextureRect" parent="Control/BottomBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.578
+anchor_top = 1.0
+anchor_right = 0.578
+anchor_bottom = 1.0
+offset_left = -15.76
+offset_top = -50.0
+offset_right = 16.24
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_vcnt6")
+expand_mode = 1
+
+[node name="easy" type="LineEdit" parent="Control"]
+layout_mode = 0
+offset_right = 260.0
+offset_bottom = 60.0
+theme = ExtResource("7_r360f")
+theme_override_font_sizes/font_size = 35
+metadata/_edit_lock_ = true
+
+[node name="medium" type="LineEdit" parent="Control"]
+layout_mode = 0
+offset_top = 60.0
+offset_right = 260.0
+offset_bottom = 120.0
+theme = ExtResource("7_r360f")
+theme_override_font_sizes/font_size = 35
+metadata/_edit_lock_ = true
+
+[node name="hard" type="LineEdit" parent="Control"]
+layout_mode = 0
+offset_top = 120.0
+offset_right = 260.0
+offset_bottom = 180.0
+theme = ExtResource("7_r360f")
+theme_override_font_sizes/font_size = 35
+metadata/_edit_lock_ = true
+
+[node name="kuso" type="LineEdit" parent="Control"]
+layout_mode = 0
+offset_top = 180.0
+offset_right = 260.0
+offset_bottom = 240.0
+theme = ExtResource("7_r360f")
+theme_override_font_sizes/font_size = 35
+metadata/_edit_lock_ = true
+
+[node name="music_name" type="LineEdit" parent="Control"]
+layout_mode = 0
+offset_top = 240.0
+offset_right = 260.0
+offset_bottom = 300.0
+theme = ExtResource("7_r360f")
+theme_override_font_sizes/font_size = 35
+metadata/_edit_lock_ = true
+
+[node name="comp" type="LineEdit" parent="Control"]
+layout_mode = 0
+offset_top = 300.0
+offset_right = 260.0
+offset_bottom = 360.0
+theme = ExtResource("7_r360f")
+theme_override_font_sizes/font_size = 35
+metadata/_edit_lock_ = true
+
+[node name="noted" type="LineEdit" parent="Control"]
+layout_mode = 0
+offset_top = 360.0
+offset_right = 260.0
+offset_bottom = 420.0
+theme = ExtResource("7_r360f")
+theme_override_font_sizes/font_size = 35
+metadata/_edit_lock_ = true
+
+[node name="title" type="LineEdit" parent="Control"]
+layout_mode = 0
+offset_top = 420.0
+offset_right = 260.0
+offset_bottom = 480.0
+theme = ExtResource("7_r360f")
+theme_override_font_sizes/font_size = 35
+metadata/_edit_lock_ = true
+
+[connection signal="index_changed" from="Control/selector" to="." method="_on_selector_index_changed"]
+[connection signal="timeout" from="Control/MusicInfo/music_name/timer" to="Control/MusicInfo/music_name" method="_on_timer_timeout"]
+[connection signal="text_changed" from="Control/easy" to="Control" method="_on_easy_text_changed"]
+[connection signal="text_changed" from="Control/medium" to="Control" method="_on_medium_text_changed"]
+[connection signal="text_changed" from="Control/hard" to="Control" method="_on_hard_text_changed"]
+[connection signal="text_changed" from="Control/kuso" to="Control" method="_on_kuso_text_changed"]
+[connection signal="text_changed" from="Control/music_name" to="Control" method="_on_music_name_text_changed"]
+[connection signal="text_changed" from="Control/comp" to="Control" method="_on_comp_text_changed"]
+[connection signal="text_changed" from="Control/noted" to="Control" method="_on_noted_text_changed"]
+[connection signal="text_changed" from="Control/title" to="Control" method="_on_title_text_changed"]

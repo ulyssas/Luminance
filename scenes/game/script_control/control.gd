@@ -44,3 +44,13 @@ extends Control
     set(value):
         level_value = value
         $MusicInfo.level_value = value
+
+@export var jacket_path: String = "":
+    set(value):
+        jacket_path = value
+        $MusicInfo.jacket_path = value
+
+
+func _on_debug_edit_text_changed(new_text):
+    composer = new_text
+    music_name = new_text

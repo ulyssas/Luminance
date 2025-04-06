@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ck2m8gpthubqf"
-path="res://.godot/imported/game.png-94598d61e6242a463d5e6a99b47ad330.ctex"
+uid="uid://x48748nn3tr7"
+path="res://.godot/imported/IlluminasLoad.png-7d4b4e0f1c12a432a156a33bf4fa1964.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/game.png"
-dest_files=["res://.godot/imported/game.png-94598d61e6242a463d5e6a99b47ad330.ctex"]
+source_file="res://assets/images/reference/IlluminasLoad.png"
+dest_files=["res://.godot/imported/IlluminasLoad.png-7d4b4e0f1c12a432a156a33bf4fa1964.ctex"]
 
 [params]
 
