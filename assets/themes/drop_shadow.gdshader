@@ -1,16 +1,14 @@
+// https://godotshaders.com/shader/simple-blur-godot-4-1/
 shader_type canvas_item;
 
+uniform float blur_amount : hint_range(-2.0, 10.0);
+uniform float mix_amount : hint_range(0.0, 1.0);
+uniform vec4 color_over : source_color;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+
 void fragment() {
-    vec4 sum = vec4(0.0);
-    float blur_size = 0.005; // ぼかしの強さ（調整可）
-
-    // 簡易ガウシアンブラー
-    for (float x = -2.0; x <= 2.0; x++) {
-        for (float y = -2.0; y <= 2.0; y++) {
-            sum += texture(TEXTURE, UV + vec2(x, y) * blur_size);
-        }
-    }
-    sum /= 25.0; // 平均化してぼかす
-
-    COLOR = sum;
+   vec4 blurred = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur_amount);
+   blurred.a = 255.0;
+   vec4 fin = mix(blurred, color_over, mix_amount);
+   COLOR = fin;
 }

@@ -1,13 +1,14 @@
-[gd_scene load_steps=21 format=3 uid="uid://da1e2w2j8f02i"]
+[gd_scene load_steps=24 format=3 uid="uid://da1e2w2j8f02i"]
 
 [ext_resource type="Script" uid="uid://cuya4bdrtj5qp" path="res://scenes/select/select.gd" id="1_0ktps"]
-[ext_resource type="Texture2D" uid="uid://h28sape61e6o" path="res://assets/images/reference/IlluminasTracks.png" id="1_5vqlq"]
 [ext_resource type="Script" uid="uid://chk8pwdpfh8" path="res://scenes/select/level_select.gd" id="2_bk0it"]
 [ext_resource type="Theme" uid="uid://6545ddaa84em" path="res://assets/themes/fonts/roboto_regular.tres" id="2_fgw6a"]
 [ext_resource type="PackedScene" uid="uid://p6rexl0qlgxw" path="res://scenes/select/level.tscn" id="2_vcnt6"]
 [ext_resource type="Script" uid="uid://b3gpdtll10fpi" path="res://scenes/select/script_control/control.gd" id="3_e4mok"]
 [ext_resource type="Texture2D" uid="uid://kxgu5jepnsfm" path="res://assets/images/arrow.svg" id="3_vcnt6"]
+[ext_resource type="Texture2D" uid="uid://cmvsxsdfnnham" path="res://assets/images/background.png" id="3_xv8n3"]
 [ext_resource type="StyleBox" uid="uid://ci86n3cbim3j" path="res://assets/themes/round_rect_black.tres" id="5_vjb3t"]
+[ext_resource type="Shader" uid="uid://bnmn2qcshrgku" path="res://assets/themes/drop_shadow.gdshader" id="6_rwp4l"]
 [ext_resource type="Script" uid="uid://chtdvbqw36ahc" path="res://scenes/select/script_control/scroller.gd" id="7_e4mok"]
 [ext_resource type="Theme" uid="uid://bw8thsr5q4qyh" path="res://assets/themes/fonts/koruri_regular.tres" id="7_i6xpm"]
 [ext_resource type="Script" uid="uid://dl7grciajpxm0" path="res://scenes/select/script_control/music_info.gd" id="7_o55a0"]
@@ -17,25 +18,31 @@
 [ext_resource type="PackedScene" uid="uid://c64yu3ktoeog" path="res://scenes/select/launcher.tscn" id="12_4gfkc"]
 [ext_resource type="Script" uid="uid://cu8gv3rrh312" path="res://scenes/select/bottom_light.gd" id="14_18xjw"]
 [ext_resource type="Texture2D" uid="uid://clfv5oo5vw1vb" path="res://assets/images/gradient.tres" id="15_4gfkc"]
+[ext_resource type="Texture2D" uid="uid://dakbrswm7h0iu" path="res://assets/images/gradient_dark.tres" id="16_puarm"]
 
-[sub_resource type="Gradient" id="Gradient_vjb3t"]
-offsets = PackedFloat32Array(0.403302, 1)
-colors = PackedColorArray(0, 0, 0, 0.745098, 0, 0, 0, 0)
+[sub_resource type="Gradient" id="Gradient_xv8n3"]
+offsets = PackedFloat32Array(0, 0.983333)
+colors = PackedColorArray(0, 0, 0, 0.784314, 0, 0, 0, 0)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_0ccww"]
-gradient = SubResource("Gradient_vjb3t")
-fill_from = Vector2(1, 0)
-fill_to = Vector2(1, 1)
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vk38d"]
+gradient = SubResource("Gradient_xv8n3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_puarm"]
+shader = ExtResource("6_rwp4l")
+shader_parameter/blur_amount = 3.0
+shader_parameter/mix_amount = 0.5
+shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_054g3"]
-texture = SubResource("GradientTexture2D_0ccww")
+texture = ExtResource("16_puarm")
 
 [node name="Select" type="Node"]
 script = ExtResource("1_0ktps")
 
-[node name="reference" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("1_5vqlq")
+[node name="Background" type="Sprite2D" parent="."]
+self_modulate = Color(0.753984, 0.753984, 0.753984, 0.882353)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_xv8n3")
 centered = false
 
 [node name="Control" type="Control" parent="."]
@@ -54,8 +61,6 @@ anchor_right = 1.0
 offset_bottom = 210.0
 grow_horizontal = 2
 theme = ExtResource("7_r360f")
-theme_override_colors/font_outline_color = Color(0.470588, 0.470588, 0.470588, 0.882353)
-theme_override_constants/outline_size = 15
 theme_override_font_sizes/font_size = 110
 text = "Select Tracks"
 horizontal_alignment = 1
@@ -64,24 +69,63 @@ vertical_alignment = 1
 [node name="selector" parent="Control" instance=ExtResource("12_4gfkc")]
 layout_mode = 1
 offset_left = -320.0
-offset_top = 320.0
+offset_top = 300.0
 offset_right = -320.0
-offset_bottom = -423.0
+offset_bottom = -443.0
+
+[node name="Gradient" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Left" type="TextureRect" parent="Control/Gradient"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 300.0
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_vk38d")
+
+[node name="Right" type="TextureRect" parent="Control/Gradient"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -256.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_vk38d")
+flip_h = true
 
 [node name="MusicInfo" type="Panel" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.521
-anchor_top = 0.231
+anchor_top = 0.241
 anchor_right = 0.911
-anchor_bottom = 0.602
+anchor_bottom = 0.611
 offset_left = -0.320068
-offset_top = 0.519989
-offset_right = 0.879883
-offset_bottom = -0.160034
+offset_top = -0.279999
+offset_right = 0.879761
+offset_bottom = 0.119934
 theme_override_styles/panel = ExtResource("5_vjb3t")
 script = ExtResource("7_o55a0")
-metadata/_edit_use_anchors_ = true
+
+[node name="frost" type="Panel" parent="Control/MusicInfo"]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_puarm")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("5_vjb3t")
+script = ExtResource("7_o55a0")
 
 [node name="music_name" type="Control" parent="Control/MusicInfo"]
 clip_contents = true
@@ -169,9 +213,9 @@ vertical_alignment = 1
 [node name="LevelSelect" type="HBoxContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.719444
+anchor_top = 0.690741
 anchor_right = 1.0
-anchor_bottom = 0.942593
+anchor_bottom = 0.94537
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 50
@@ -464,84 +508,5 @@ grow_vertical = 0
 texture = ExtResource("3_vcnt6")
 expand_mode = 1
 
-[node name="easy" type="LineEdit" parent="Control"]
-layout_mode = 0
-offset_right = 260.0
-offset_bottom = 60.0
-theme = ExtResource("7_r360f")
-theme_override_font_sizes/font_size = 35
-metadata/_edit_lock_ = true
-
-[node name="medium" type="LineEdit" parent="Control"]
-layout_mode = 0
-offset_top = 60.0
-offset_right = 260.0
-offset_bottom = 120.0
-theme = ExtResource("7_r360f")
-theme_override_font_sizes/font_size = 35
-metadata/_edit_lock_ = true
-
-[node name="hard" type="LineEdit" parent="Control"]
-layout_mode = 0
-offset_top = 120.0
-offset_right = 260.0
-offset_bottom = 180.0
-theme = ExtResource("7_r360f")
-theme_override_font_sizes/font_size = 35
-metadata/_edit_lock_ = true
-
-[node name="kuso" type="LineEdit" parent="Control"]
-layout_mode = 0
-offset_top = 180.0
-offset_right = 260.0
-offset_bottom = 240.0
-theme = ExtResource("7_r360f")
-theme_override_font_sizes/font_size = 35
-metadata/_edit_lock_ = true
-
-[node name="music_name" type="LineEdit" parent="Control"]
-layout_mode = 0
-offset_top = 240.0
-offset_right = 260.0
-offset_bottom = 300.0
-theme = ExtResource("7_r360f")
-theme_override_font_sizes/font_size = 35
-metadata/_edit_lock_ = true
-
-[node name="comp" type="LineEdit" parent="Control"]
-layout_mode = 0
-offset_top = 300.0
-offset_right = 260.0
-offset_bottom = 360.0
-theme = ExtResource("7_r360f")
-theme_override_font_sizes/font_size = 35
-metadata/_edit_lock_ = true
-
-[node name="noted" type="LineEdit" parent="Control"]
-layout_mode = 0
-offset_top = 360.0
-offset_right = 260.0
-offset_bottom = 420.0
-theme = ExtResource("7_r360f")
-theme_override_font_sizes/font_size = 35
-metadata/_edit_lock_ = true
-
-[node name="title" type="LineEdit" parent="Control"]
-layout_mode = 0
-offset_top = 420.0
-offset_right = 260.0
-offset_bottom = 480.0
-theme = ExtResource("7_r360f")
-theme_override_font_sizes/font_size = 35
-metadata/_edit_lock_ = true
-
 [connection signal="index_changed" from="Control/selector" to="." method="_on_selector_index_changed"]
 [connection signal="timeout" from="Control/MusicInfo/music_name/timer" to="Control/MusicInfo/music_name" method="_on_timer_timeout"]
-[connection signal="text_changed" from="Control/easy" to="Control" method="_on_easy_text_changed"]
-[connection signal="text_changed" from="Control/medium" to="Control" method="_on_medium_text_changed"]
-[connection signal="text_changed" from="Control/hard" to="Control" method="_on_hard_text_changed"]
-[connection signal="text_changed" from="Control/kuso" to="Control" method="_on_kuso_text_changed"]
-[connection signal="text_changed" from="Control/music_name" to="Control" method="_on_music_name_text_changed"]
-[connection signal="text_changed" from="Control/comp" to="Control" method="_on_comp_text_changed"]
-[connection signal="text_changed" from="Control/noted" to="Control" method="_on_noted_text_changed"]
-[connection signal="text_changed" from="Control/title" to="Control" method="_on_title_text_changed"]

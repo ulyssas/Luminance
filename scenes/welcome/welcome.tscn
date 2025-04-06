@@ -1,12 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://64pmmemfbiv3"]
+[gd_scene load_steps=19 format=3 uid="uid://64pmmemfbiv3"]
 
 [ext_resource type="Script" uid="uid://de0fic687hdqu" path="res://scenes/welcome/welcome.gd" id="1_cgoi3"]
 [ext_resource type="Script" uid="uid://dbap0gqox0ty1" path="res://addons/markdownlabel/markdownlabel.gd" id="2_4co5k"]
 [ext_resource type="PackedScene" uid="uid://b8e7jmw45nr62" path="res://scenes/game/game.tscn" id="2_r16cy"]
 [ext_resource type="Script" uid="uid://dcx7crs23nf4" path="res://addons/markdownlabel/header_formats/h1_format.gd" id="3_8et4a"]
 [ext_resource type="PackedScene" uid="uid://da1e2w2j8f02i" path="res://scenes/select/select.tscn" id="3_8fxic"]
+[ext_resource type="Texture2D" uid="uid://cmvsxsdfnnham" path="res://assets/images/background.png" id="4_em5qb"]
 [ext_resource type="Script" uid="uid://d0sin64i4v3op" path="res://addons/markdownlabel/header_formats/h2_format.gd" id="4_nyd6i"]
 [ext_resource type="Script" uid="uid://dlok0dv1tq2bf" path="res://addons/markdownlabel/header_formats/h3_format.gd" id="5_3lerr"]
+[ext_resource type="Texture2D" uid="uid://bm16ybdrhrj41" path="res://assets/images/title.png" id="5_ghlg0"]
 [ext_resource type="Script" uid="uid://bayuh2vafablg" path="res://addons/markdownlabel/header_formats/h4_format.gd" id="6_18vpa"]
 [ext_resource type="Script" uid="uid://dfr1w7u3jgni3" path="res://addons/markdownlabel/header_formats/h5_format.gd" id="7_lab8k"]
 [ext_resource type="Script" uid="uid://bsi6dexoofpe6" path="res://addons/markdownlabel/header_formats/h6_format.gd" id="8_hxxw2"]
@@ -76,13 +78,35 @@ script = ExtResource("1_cgoi3")
 game_scene = ExtResource("2_r16cy")
 select_scene = ExtResource("3_8fxic")
 
+[node name="Background" type="Sprite2D" parent="."]
+self_modulate = Color(0.753984, 0.753984, 0.753984, 0.882353)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_em5qb")
+centered = false
+
+[node name="welcome_text2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -291.0
+offset_bottom = 227.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Sprite2D" parent="welcome_text2"]
+position = Vector2(960, 98)
+scale = Vector2(0.536313, 0.536313)
+texture = ExtResource("5_ghlg0")
+
 [node name="welcome_text" type="RichTextLabel" parent="."]
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = 110.0
-offset_top = -198.0
+offset_top = -128.0
 offset_right = -110.0
 offset_bottom = 227.0
 grow_horizontal = 2
@@ -90,7 +114,7 @@ grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 30
 theme_override_font_sizes/bold_font_size = 39
 bbcode_enabled = true
-text = "[font_size=68]Luminance[/font_size]
+text = "
 
 Luminance is a rhythm game.
 
@@ -98,7 +122,7 @@ You can add musics in the [b]musics[/b] folder."
 scroll_following = true
 horizontal_alignment = 1
 script = ExtResource("2_4co5k")
-markdown_text = "# Luminance
+markdown_text = "
 
 Luminance is a rhythm game.
 

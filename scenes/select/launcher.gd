@@ -18,7 +18,7 @@ var current_index = 0
 # キーリピート用
 var hold_direction: int = 0 # -1(左), 0, 1(右)
 var hold_timer: float = 0.0
-var hold_delay: float = 0.4
+var hold_delay: float = 0.2
 var hold_interval: float = 0.1
 
 func setup():
