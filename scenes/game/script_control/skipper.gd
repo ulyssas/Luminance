@@ -18,7 +18,7 @@ func update_text():
 func reset_position():
     var font: Font = name_label.get_theme_font("font")
     var font_size: int = name_label.get_theme_font_size("font_size")
-    var string_size = font.get_string_size(name_label.text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
+    var string_size: Vector2 = font.get_string_size(name_label.text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
     name_label.size.x = string_size.x
 
     # サイズをチェックしてスクロール開始

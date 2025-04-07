@@ -8,12 +8,19 @@ var music_datas: Array[MusicData] = []:
         music_datas = value
         setup()
 
+# レベル選択画面に映るとき使います
+var disabled: bool = false:
+    set(value):
+        disabled = value
+        hold_direction = 0
+        update_visuals()
+
 # セレクター用
-var length = 320
-var spacing = 150
-var scaling = 1.5
-var duration = 0.3
-var current_index = 0
+var length: int = 320
+var spacing: int = 150
+var scaling: float = 1.5
+var duration: float = 0.3
+var current_index: int = 0
 
 # キーリピート用
 var hold_direction: int = 0 # -1(左), 0, 1(右)
@@ -39,11 +46,11 @@ func setup():
 func _process(delta):
     if hold_direction != 0:
         hold_timer += delta
-    
+
     if hold_timer >= hold_delay:
         var repeat_time: float = hold_timer - hold_delay
         var repeat_count: int = int(repeat_time / hold_interval)
-        
+
         if repeat_count > 0:
             hold_timer = hold_delay + fmod(repeat_time, hold_interval)
             if hold_direction == 1:
@@ -52,6 +59,9 @@ func _process(delta):
                 change_index((current_index - 1 + music_datas.size()) % music_datas.size())
 
 func _unhandled_input(event):
+    if disabled:
+        return
+
     if event.is_action_pressed("lane_3"):
         change_index((current_index + 1) % music_datas.size())
         hold_direction = 1
@@ -66,7 +76,7 @@ func _unhandled_input(event):
         hold_direction = 0
 
 func change_index(new_index: int):
-    if new_index == current_index:
+    if disabled or new_index == current_index:
         return
 
     current_index = new_index
@@ -76,13 +86,16 @@ func change_index(new_index: int):
 
 func update_visuals():
     if music_datas.size() > 0:
-        var center_x = image_container.size.x / 2
         var selected_rect = image_container.get_child(current_index)
-        var offset = selected_rect.position.x - center_x + selected_rect.size.x / 2
+        var center_x: float = image_container.size.x / 2
+        var offset: float = selected_rect.position.x - center_x + selected_rect.size.x / 2
 
         for i in image_container.get_child_count():
             var target = image_container.get_child(i)
             var is_selected = (i == current_index)
+
+            # disabled かつ選択中なら非表示
+            target.visible = not (disabled and is_selected)
 
             var scale = Vector2(scaling, scaling) if is_selected else Vector2(1, 1)
             var pos = target.position - Vector2(offset, 0)

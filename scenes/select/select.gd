@@ -21,13 +21,13 @@ func update_view():
         push_warning("無効なインデックスです")
         return
 
-    var music = music_datas[music_index]
+    var music: MusicData = music_datas[music_index]
 
     $Control.music_name = music.title
     $Control.composer =  music.composer
     $Control.note_designer =  music.note_designer
 
-    var level_values = {}
+    var level_values: Dictionary = {}
     for level in music.levels:
         level_values[level.level_name] = level.level_value
 
@@ -35,3 +35,6 @@ func update_view():
     $Control/LevelSelect.medium_value = level_values.get("medium", "")
     $Control/LevelSelect.hard_value = level_values.get("hard", "")
     $Control/LevelSelect.kuso_value = level_values.get("kuso", "")
+
+func _on_check_box_toggled(toggled_on):
+    $Control/selector.disabled = toggled_on

@@ -10,6 +10,6 @@ func _ready():
     $score_value.text = "0"
 
 func update_score():
-    var progress = score_value / 999999.0
+    var progress: float = score_value / 999999.0
     $progress_bar.scale.x = clamp(progress, 0.0, 1.0)
     $score_value.text = str(int(score_value))

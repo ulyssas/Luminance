@@ -508,5 +508,10 @@ grow_vertical = 0
 texture = ExtResource("3_vcnt6")
 expand_mode = 1
 
+[node name="CheckBox" type="CheckBox" parent="."]
+offset_right = 24.0
+offset_bottom = 24.0
+
 [connection signal="index_changed" from="Control/selector" to="." method="_on_selector_index_changed"]
 [connection signal="timeout" from="Control/MusicInfo/music_name/timer" to="Control/MusicInfo/music_name" method="_on_timer_timeout"]
+[connection signal="toggled" from="CheckBox" to="." method="_on_check_box_toggled"]
