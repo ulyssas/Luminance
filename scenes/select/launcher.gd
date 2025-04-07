@@ -15,6 +15,8 @@ var disabled: bool = false:
         hold_direction = 0
         update_visuals()
 
+var original_position: Vector2
+
 # セレクター用
 var length: int = 320
 var spacing: int = 150
@@ -42,7 +44,10 @@ func setup():
         image_container.add_child(img_square)
 
     update_visuals()
-    
+
+func _ready():
+    original_position = position
+
 func _process(delta):
     if hold_direction != 0:
         hold_timer += delta
@@ -95,11 +100,17 @@ func update_visuals():
             var is_selected = (i == current_index)
 
             # disabled かつ選択中なら非表示
-            target.visible = not (disabled and is_selected)
+            target.z_index = 1 if (disabled and is_selected) else 0
+            #target.visible = not (disabled and is_selected)
 
             var scale = Vector2(scaling, scaling) if is_selected else Vector2(1, 1)
             var pos = target.position - Vector2(offset, 0)
 
             var tween = create_tween()
-            tween.parallel().tween_property(target, "position", pos, duration).set_trans(Tween.TRANS_CUBIC)
-            tween.parallel().tween_property(target, "scale", scale, duration).set_trans(Tween.TRANS_QUINT)
+            tween.parallel().tween_property(target, "position", pos, duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+            tween.parallel().tween_property(target, "scale", scale, duration).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+
+    var tween = create_tween()
+    var target_pos = original_position + Vector2(-350, 0) if disabled else original_position
+    tween.parallel().tween_property(self, "position", target_pos, 0.4)\
+        .set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)

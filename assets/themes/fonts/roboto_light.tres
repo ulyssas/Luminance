@@ -10,4 +10,4 @@ baseline_offset = 0.035
 
 [resource]
 default_font = SubResource("FontVariation_qfn0o")
-default_font_size = 130
+default_font_size = 120

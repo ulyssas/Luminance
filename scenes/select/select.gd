@@ -35,6 +35,3 @@ func update_view():
     $Control/LevelSelect.medium_value = level_values.get("medium", "")
     $Control/LevelSelect.hard_value = level_values.get("hard", "")
     $Control/LevelSelect.kuso_value = level_values.get("kuso", "")
-
-func _on_check_box_toggled(toggled_on):
-    $Control/selector.disabled = toggled_on
