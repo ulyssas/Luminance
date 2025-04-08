@@ -22,15 +22,16 @@ func _unhandled_input(event):
         return
 
     if event.is_action_pressed("lane_3"):
-        change_index((current_index + 1) % child_count)
+        change_index((current_index + 1))
 
     elif event.is_action_pressed("lane_2"):
-        change_index((current_index - 1 + child_count) % child_count)
+        change_index((current_index - 1))
 
 func change_index(new_index: int):
     if disabled or new_index == current_index:
         return
 
+    new_index = clamp(new_index, 0, child_count-1)
     current_index = new_index
     index_changed.emit()
 
