@@ -111,6 +111,6 @@ func update_visuals():
             tween.parallel().tween_property(target, "scale", scale, duration).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 
     var tween = create_tween()
-    var target_pos = original_position + Vector2(-350, 0) if disabled else original_position
+    var target_pos = original_position + Vector2(-270, 0) if disabled else original_position
     tween.parallel().tween_property(self, "position", target_pos, 0.4)\
         .set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)

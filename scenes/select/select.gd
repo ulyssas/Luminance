@@ -1,22 +1,26 @@
 extends Node
 
+const SelectState = preload("res://scenes/select/select_state.gd")
+
+var current_state = SelectState.State.SELECT_TRACKS
 var music_datas: Array[MusicData]
 var music_index: int = 0
+var level_index: int = 0
 
 func set_music_datas(data: Array[MusicData]):
     music_datas = data
 
 func _ready():
     if music_datas:
-        $Control/selector.music_datas = music_datas
-        update_view()
+        $Control/MusicSelect.music_datas = music_datas
+        update_music_info()
 
 func _on_selector_index_changed():
     if music_datas:
-        update_view()
+        update_music_info()
 
-func update_view():
-    music_index = $Control/selector.current_index
+func update_music_info():
+    music_index = $Control/MusicSelect.current_index
     if music_index < 0 or music_index >= music_datas.size():
         push_warning("無効なインデックスです")
         return
@@ -31,7 +35,35 @@ func update_view():
     for level in music.levels:
         level_values[level.level_name] = level.level_value
 
-    $Control/LevelSelect.easy_value = level_values.get("easy", "")
-    $Control/LevelSelect.medium_value = level_values.get("medium", "")
-    $Control/LevelSelect.hard_value = level_values.get("hard", "")
-    $Control/LevelSelect.kuso_value = level_values.get("kuso", "")
+    $Control/LevelSelect/Container.easy_value = level_values.get("easy", "")
+    $Control/LevelSelect/Container.medium_value = level_values.get("medium", "")
+    $Control/LevelSelect/Container.hard_value = level_values.get("hard", "")
+    $Control/LevelSelect/Container.kuso_value = level_values.get("kuso", "")
+
+func update_state():
+    $Control.set_state(current_state)
+
+func _unhandled_input(event):
+    if event.is_action_pressed("confirm"):
+        match current_state:
+            SelectState.State.OPTIONS:
+                pass
+            SelectState.State.SELECT_TRACKS:
+                current_state = SelectState.State.SELECT_LEVELS
+        update_state()
+
+    elif event.is_action_pressed("lane_1"):
+        match current_state:
+            SelectState.State.OPTIONS:
+                current_state = SelectState.State.SELECT_LEVELS
+            SelectState.State.SELECT_LEVELS:
+                current_state = SelectState.State.SELECT_TRACKS
+        update_state()
+
+    elif event.is_action_pressed("lane_4"):
+        match current_state:
+            SelectState.State.OPTIONS:
+                pass
+            SelectState.State.SELECT_LEVELS:
+                current_state = SelectState.State.OPTIONS
+        update_state()

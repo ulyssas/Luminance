@@ -18,7 +18,6 @@ func _on_folder_open_button_up():
     var music_folder = OS.get_user_data_dir().path_join("musics")
     OS.shell_open(music_folder)
 
-
 func _on_game_open_button_up():
     """`game` を開く"""
     if game_scene == null:

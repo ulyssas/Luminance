@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://da1e2w2j8f02i"]
+[gd_scene load_steps=36 format=3 uid="uid://da1e2w2j8f02i"]
 
 [ext_resource type="Script" uid="uid://cuya4bdrtj5qp" path="res://scenes/select/select.gd" id="1_0ktps"]
 [ext_resource type="Script" uid="uid://chk8pwdpfh8" path="res://scenes/select/level_select.gd" id="2_bk0it"]
@@ -15,14 +15,19 @@
 [ext_resource type="Script" uid="uid://dl7grciajpxm0" path="res://scenes/select/script_control/music_info.gd" id="7_o55a0"]
 [ext_resource type="Theme" uid="uid://dpqo4kc78kqpt" path="res://assets/themes/fonts/roboto_light.tres" id="7_r360f"]
 [ext_resource type="Script" uid="uid://pp58gccdejp1" path="res://scenes/select/script_control/fade.gd" id="7_vk38d"]
+[ext_resource type="Script" uid="uid://bydtvb4s1df08" path="res://scenes/select/script_control/title.gd" id="9_g16yp"]
 [ext_resource type="Theme" uid="uid://jj50hfastx10" path="res://assets/themes/fonts/koruri_regular_tight.tres" id="10_e4mok"]
 [ext_resource type="Script" uid="uid://s5huwwh3jjkv" path="res://scenes/select/script_control/skipper.gd" id="10_o55a0"]
 [ext_resource type="PackedScene" uid="uid://c64yu3ktoeog" path="res://scenes/select/launcher.tscn" id="12_4gfkc"]
-[ext_resource type="Script" uid="uid://cu8gv3rrh312" path="res://scenes/select/bottom_light.gd" id="14_18xjw"]
+[ext_resource type="Script" uid="uid://cu8gv3rrh312" path="res://scenes/select/script_control/bottom_light.gd" id="14_18xjw"]
 [ext_resource type="Texture2D" uid="uid://clfv5oo5vw1vb" path="res://assets/images/gradient.tres" id="15_4gfkc"]
 [ext_resource type="Theme" uid="uid://6w2wmpuxuqbm" path="res://assets/themes/fonts/koruri_bold.tres" id="16_4lsl8"]
 [ext_resource type="Texture2D" uid="uid://dakbrswm7h0iu" path="res://assets/images/gradient_dark.tres" id="16_puarm"]
+[ext_resource type="Script" uid="uid://cn53dddtm1y5n" path="res://scenes/select/script_control/level_select.gd" id="18_xr1oa"]
 [ext_resource type="Script" uid="uid://dv4e60xfwu8wv" path="res://scenes/select/script_control/bottom_bar.gd" id="19_7kl8d"]
+[ext_resource type="Texture2D" uid="uid://bksi0pa84axw3" path="res://assets/images/cursor_1.png" id="21_5snbg"]
+[ext_resource type="Script" uid="uid://gulq3pam87es" path="res://scenes/select/script_control/cursor.gd" id="21_a8ep5"]
+[ext_resource type="Texture2D" uid="uid://ccebkbf6bnbg8" path="res://assets/images/cursor_2.png" id="22_a8ep5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xv8n3"]
 shader = ExtResource("6_rwp4l")
@@ -42,6 +47,15 @@ shader = ExtResource("6_rwp4l")
 shader_parameter/blur_amount = 3.0
 shader_parameter/mix_amount = 0.5
 shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_a8ep5"]
+offsets = PackedFloat32Array(0, 0.622727)
+colors = PackedColorArray(1, 1, 1, 0.713726, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w2jup"]
+gradient = SubResource("Gradient_a8ep5")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_054g3"]
 texture = ExtResource("16_puarm")
@@ -69,11 +83,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_e4mok")
 
-[node name="selector" parent="Control" instance=ExtResource("12_4gfkc")]
+[node name="MusicSelect" parent="Control" instance=ExtResource("12_4gfkc")]
 layout_mode = 1
-offset_left = -320.0
+offset_left = -380.0
 offset_top = 300.0
-offset_right = -320.0
+offset_right = -380.0
 offset_bottom = -443.0
 
 [node name="fade" type="ColorRect" parent="Control"]
@@ -98,6 +112,7 @@ theme_override_font_sizes/font_size = 110
 text = "Select Tracks"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("9_g16yp")
 
 [node name="Gradient" type="Control" parent="Control"]
 layout_mode = 1
@@ -127,11 +142,6 @@ grow_vertical = 2
 texture = SubResource("GradientTexture1D_vk38d")
 flip_h = true
 
-[node name="selected_music" type="TextureRect" parent="Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="MusicInfo" type="Panel" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
@@ -156,7 +166,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("5_vjb3t")
-script = ExtResource("7_o55a0")
 
 [node name="music_name" type="Control" parent="Control/MusicInfo"]
 clip_contents = true
@@ -256,34 +265,73 @@ theme_override_font_sizes/font_size = 45
 text = "Enterを押して開始"
 horizontal_alignment = 1
 
-[node name="LevelSelect" type="HBoxContainer" parent="Control"]
+[node name="LevelSelect" type="Control" parent="Control"]
 layout_mode = 1
-anchors_preset = -1
 anchor_top = 0.725
 anchor_right = 1.0
-anchor_bottom = 0.94537
+anchor_bottom = 0.934
+offset_bottom = 0.279968
+script = ExtResource("18_xr1oa")
+
+[node name="Container" type="HBoxContainer" parent="Control/LevelSelect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 50
 alignment = 1
 script = ExtResource("2_bk0it")
-metadata/_edit_use_anchors_ = true
 
-[node name="easy" parent="Control/LevelSelect" instance=ExtResource("2_vcnt6")]
+[node name="easy" parent="Control/LevelSelect/Container" instance=ExtResource("2_vcnt6")]
 layout_mode = 2
 level_name = "Easy"
 
-[node name="medium" parent="Control/LevelSelect" instance=ExtResource("2_vcnt6")]
+[node name="medium" parent="Control/LevelSelect/Container" instance=ExtResource("2_vcnt6")]
 layout_mode = 2
 level_name = "Medium"
 
-[node name="hard" parent="Control/LevelSelect" instance=ExtResource("2_vcnt6")]
+[node name="hard" parent="Control/LevelSelect/Container" instance=ExtResource("2_vcnt6")]
 layout_mode = 2
 level_name = "Hard"
 
-[node name="kuso" parent="Control/LevelSelect" instance=ExtResource("2_vcnt6")]
+[node name="kuso" parent="Control/LevelSelect/Container" instance=ExtResource("2_vcnt6")]
 layout_mode = 2
 level_name = "Kuso"
+
+[node name="Cursor" type="Control" parent="Control/LevelSelect"]
+anchors_preset = 0
+offset_left = 85.0
+offset_top = -54.0
+offset_right = 485.0
+offset_bottom = 346.0
+script = ExtResource("21_a8ep5")
+
+[node name="cursor_1" type="TextureRect" parent="Control/LevelSelect/Cursor"]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 400.0
+pivot_offset = Vector2(200, 200)
+texture = ExtResource("21_5snbg")
+expand_mode = 1
+
+[node name="cursor_2" type="TextureRect" parent="Control/LevelSelect/Cursor"]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 400.0
+pivot_offset = Vector2(200, 200)
+texture = ExtResource("22_a8ep5")
+expand_mode = 1
+
+[node name="Center" type="TextureRect" parent="Control/LevelSelect/Cursor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_w2jup")
 
 [node name="BottomBar" type="Control" parent="Control"]
 layout_mode = 1
@@ -555,5 +603,5 @@ grow_vertical = 0
 texture = ExtResource("3_vcnt6")
 expand_mode = 1
 
-[connection signal="index_changed" from="Control/selector" to="." method="_on_selector_index_changed"]
+[connection signal="index_changed" from="Control/MusicSelect" to="." method="_on_selector_index_changed"]
 [connection signal="timeout" from="Control/MusicInfo/music_name/timer" to="Control/MusicInfo/music_name" method="_on_timer_timeout"]

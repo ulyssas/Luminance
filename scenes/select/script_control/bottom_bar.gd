@@ -1,16 +1,16 @@
 extends Control
 
 
+var is_music_select: bool = false:
+    set(value):
+        is_music_select = value
+        $cancel.visible = !value
+
 var is_level_select: bool = false:
     set(value):
         is_level_select = value
-        $options.visible = is_level_select
-        $cancel.visible = is_level_select
+        $options.visible = value
 
 func _ready():
     $options.visible = false
     $cancel.visible = false
-
-#var is_option_select: bool = false:
-    #set(value):
-        #is_option_select = value
