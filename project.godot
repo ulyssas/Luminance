@@ -21,11 +21,13 @@ config/icon="uid://df3emkxny4p8x"
 
 MusicRead="*res://scripts/music_loader/music_read.gd"
 Quit="*res://scripts/quit.gd"
+AudioManager="*res://scripts/audio_manager.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=2
 window/stretch/mode="canvas_items"
 
 [editor_plugins]

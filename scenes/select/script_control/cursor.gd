@@ -29,13 +29,12 @@ func trigger_spin():
 
     tween = create_tween()
 
-    var rotate_1 = deg_to_rad(-60)
-    var rotate_2 = deg_to_rad(-180)
+    var rotate1 = deg_to_rad(80)
+    var rotate2 = deg_to_rad(360)
+
+    part1.rotation = rotate1
+    part2.rotation = 0
 
     # 回転
-    tween.tween_property(part1, "rotation", rotate_1, 0.1).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-    tween.parallel().tween_property(part2, "rotation", rotate_2, 0.1).set_trans(Tween.TRANS_SINE)
-
-    # 戻す
-    tween.tween_property(part1, "rotation", 0.0, 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-    tween.parallel().tween_property(part2, "rotation", 0.0, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+    tween.parallel().tween_property(part1, "rotation", 0.0, 0.2).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+    tween.parallel().tween_property(part2, "rotation", rotate2, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)

@@ -39,10 +39,19 @@ func load_music_data(source: String) -> Array[MusicData]:
                 var jacket_path = find_jacket_image_path(folder_path)
                 var data_file = FileAccess.open(data_path, FileAccess.READ)
                 if data_file:
+                    # audio files
+                    var music_path = "%s/music.mp3" % folder_path
+                    var sabi_path = "%s/sabi.mp3" % folder_path
+                    #print("%s, %s" % [music_path, music_path])
+                    var music = AudioStreamMP3.load_from_file(music_path)
+                    var sabi = AudioStreamMP3.load_from_file(sabi_path)
+                    sabi.loop = true
+
+                    # data files
                     var lines = []
                     while not data_file.eof_reached():
                         lines.append(data_file.get_line().strip_edges())
-
+                    
                     if lines.size() >= 9:
                         var data = MusicData.new(
                             lines[0],         # title
@@ -54,7 +63,9 @@ func load_music_data(source: String) -> Array[MusicData]:
                             int(lines[6]),    # sabi_begin
                             int(lines[7]),    # sabi_end
                             float(lines[8]),  # velocity
-                            levels
+                            levels,
+                            music,
+                            sabi,
                         )
                         music_data_list.append(data)
 

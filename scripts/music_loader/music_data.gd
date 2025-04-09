@@ -11,6 +11,8 @@ var sabi_begin: int
 var sabi_end: int
 var velocity: float
 var levels: Array[LevelData]
+var music: AudioStreamMP3
+var sabi: AudioStreamMP3
 
 # コンストラクタ
 func _init(
@@ -23,7 +25,9 @@ func _init(
     sabi_begin: int,
     sabi_end: int,
     velocity: float,
-    levels: Array[LevelData]
+    levels: Array[LevelData],
+    music: AudioStreamMP3,
+    sabi: AudioStreamMP3,
 ):
     self.title = title
     self.texture_path = texture_path
@@ -35,6 +39,8 @@ func _init(
     self.sabi_end = sabi_end
     self.velocity = velocity
     self.levels = levels
+    self.music = music
+    self.sabi = sabi
 
 # デバッグ用の情報表示
 func get_info() -> String:

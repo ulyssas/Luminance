@@ -1,0 +1,12 @@
+Tap: Assorted_SE01-01
+Air: Motion-Swish02-1
+Select: Assorted_SE01-08
+Enter: Shortbridge29-3
+
+全てゲイン済み、TapとEnterはエフェクトがかけてあります。
+
+https://otologic.jp/free/se/motion-swish01.html
+https://otologic.jp/free/se/assorted-se01.html
+https://otologic.jp/free/se/others01.html
+
+License: https://creativecommons.org/licenses/by/4.0/deed.ja
