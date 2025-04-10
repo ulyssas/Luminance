@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://bp5xhe15hiv2r"]
+
+[ext_resource type="Script" uid="uid://gulq3pam87es" path="res://scenes/select/script_control/cursor.gd" id="1_l1f8w"]
+[ext_resource type="Texture2D" uid="uid://bksi0pa84axw3" path="res://assets/images/cursor/cursor_1.png" id="2_u2ome"]
+[ext_resource type="Texture2D" uid="uid://ccebkbf6bnbg8" path="res://assets/images/cursor/cursor_2.png" id="3_kjfqu"]
+
+[sub_resource type="Gradient" id="Gradient_a8ep5"]
+offsets = PackedFloat32Array(0, 0.622727)
+colors = PackedColorArray(1, 1, 1, 0.713726, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w2jup"]
+gradient = SubResource("Gradient_a8ep5")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Cursor" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 85.0
+offset_top = -54.0
+offset_right = 485.0
+offset_bottom = 346.0
+script = ExtResource("1_l1f8w")
+
+[node name="cursor_1" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 400.0
+pivot_offset = Vector2(200, 200)
+texture = ExtResource("2_u2ome")
+expand_mode = 1
+
+[node name="cursor_2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 400.0
+pivot_offset = Vector2(200, 200)
+texture = ExtResource("3_kjfqu")
+expand_mode = 1
+
+[node name="Center" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_w2jup")

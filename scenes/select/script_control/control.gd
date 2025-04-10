@@ -29,6 +29,6 @@ func set_state(state):
         SelectState.State.SELECT_TRACKS:
             $Title.set_title("Select Tracks")
         SelectState.State.SELECT_LEVELS:
-            $Title.set_title("Select Levels") 
+            $Title.set_title("Select Levels")
         SelectState.State.OPTIONS:
-            $Title.set_title("Options") 
+            $Title.set_title("Options")

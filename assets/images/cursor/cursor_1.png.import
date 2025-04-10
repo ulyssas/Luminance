@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4fp4oo0dmebd"
-path="res://.godot/imported/Notes.png-d1e5e923dfa88129ba74f8acc61cd9d2.ctex"
+uid="uid://bksi0pa84axw3"
+path="res://.godot/imported/cursor_1.png-5b586ae5b3651078b743ece621888913.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/illuminas/Notes.png"
-dest_files=["res://.godot/imported/Notes.png-d1e5e923dfa88129ba74f8acc61cd9d2.ctex"]
+source_file="res://assets/images/cursor/cursor_1.png"
+dest_files=["res://.godot/imported/cursor_1.png-5b586ae5b3651078b743ece621888913.ctex"]
 
 [params]
 

@@ -28,7 +28,7 @@ func _on_game_open_button_up():
     var music_list = MusicRead.load_music_data("user")
 
     if music_list.size() > 0:
-        game_instance.set_music_data(music_list[0])  # 最初のデータを渡す
+        game_instance.set_music_data(music_list[0], 0)  # 最初のデータを渡す
 
     get_tree().root.add_child(game_instance)
     get_tree().current_scene.queue_free()

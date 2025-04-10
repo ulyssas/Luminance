@@ -1,5 +1,6 @@
 extends Node
 
+@export var game_scene: PackedScene
 @export var enter_se: AudioStream
 @export var select_se: AudioStream
 
@@ -8,7 +9,7 @@ const SelectState = preload("res://scenes/select/select_state.gd")
 var current_state = SelectState.State.SELECT_TRACKS
 var music_datas: Array[MusicData]
 var music_index: int = 0
-var level_index: int = 0
+var level_index: int = 0 # 0~3
 
 func set_music_datas(data: Array[MusicData]):
     music_datas = data
@@ -57,6 +58,46 @@ func update_state():
 func update_level_info():
     level_index = $Control/LevelSelect.current_index
 
+func load_game_scene():
+    """`game` を開く"""
+    if game_scene == null:
+        push_warning("シーンが設定されていません")
+        return
+
+    if music_datas.size() == 0:
+        push_warning("曲データがありません")
+        return
+
+    var levels = music_datas[music_index].levels
+    var level_names = ["easy", "medium", "hard", "kuso"]
+    if level_index < 0 or level_index >= level_names.size():
+        push_error("無効な level_index: %d" % level_index)
+        return
+
+    var target_level_name = level_names[level_index]
+    var selected_level_index: int = -1
+    for i in levels.size():
+        if levels[i].level_name == target_level_name:
+            selected_level_index = i
+            break
+
+    if selected_level_index == -1:
+        push_warning("指定されたレベル（%s）は存在しません" % target_level_name)
+        return
+
+    # フェードアウト
+    Fade.fade_out(0.5)
+
+    AudioManager.stop_music(2.0)
+
+    Fade.connect("fade_out_finished", func():
+        var game_instance = game_scene.instantiate()
+        game_instance.set_music_data(music_datas[music_index], selected_level_index)
+        get_tree().root.add_child(game_instance)
+        get_tree().current_scene.queue_free()
+        get_tree().current_scene = game_instance
+    )
+
 func _unhandled_input(event):
     if event.is_action_pressed("confirm"):
         AudioManager.play_se(enter_se)
@@ -65,6 +106,11 @@ func _unhandled_input(event):
                 pass
             SelectState.State.SELECT_TRACKS:
                 current_state = SelectState.State.SELECT_LEVELS
+            SelectState.State.SELECT_LEVELS:
+                AudioManager.play_se(enter_se)
+                # $Cursor.trigger_spin()とか 待ってからシーン切り替えにすべき
+                # update_state()
+                load_game_scene()
         update_state()
 
     elif event.is_action_pressed("lane_1"):

@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://tnnhqgprtoty"]
+
+[ext_resource type="Texture2D" uid="uid://kna26iktugdr" path="res://assets/images/notes/Notes.png" id="1_tmyk7"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.3
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_tmyk7")
+emission_enabled = true
+emission_energy_multiplier = 0.5
+emission_texture = ExtResource("1_tmyk7")

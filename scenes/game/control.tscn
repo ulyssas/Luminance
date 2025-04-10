@@ -61,7 +61,7 @@ offset_left = 78.0
 offset_right = 374.0
 offset_bottom = 35.0
 theme = ExtResource("1_c6xsw")
-text = "Luminance"
+text = "Luminance v0.1"
 vertical_alignment = 1
 
 [node name="MusicInfo" type="Panel" parent="."]

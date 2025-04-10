@@ -42,10 +42,10 @@ func load_music_data(source: String) -> Array[MusicData]:
                     # audio files
                     var music_path = "%s/music.mp3" % folder_path
                     var sabi_path = "%s/sabi.mp3" % folder_path
-                    #print("%s, %s" % [music_path, music_path])
                     var music = AudioStreamMP3.load_from_file(music_path)
                     var sabi = AudioStreamMP3.load_from_file(sabi_path)
-                    sabi.loop = true
+                    if sabi:
+                        sabi.loop = true
 
                     # data files
                     var lines = []

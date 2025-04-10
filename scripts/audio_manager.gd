@@ -20,8 +20,18 @@ func play_music(stream: AudioStream):
     music_player.stream = stream
     music_player.play()
 
-func stop_music():
+func stop_music(fade_duration: float = 1.0):
+    if music_player.playing:
+        if fade_duration > 0.0:
+            var tween: Tween = create_tween()
+            tween.tween_property(music_player, "volume_db", -80, fade_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+            tween.tween_callback(Callable(self, "_stop_music_immediately"))
+        else:
+            _stop_music_immediately()
+
+func _stop_music_immediately():
     music_player.stop()
+    music_player.volume_db = 0
 
 func play_se(stream: AudioStream):
     if not stream:
