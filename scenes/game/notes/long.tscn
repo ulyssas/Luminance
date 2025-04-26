@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4mccik67357d"]
+
+[ext_resource type="Material" uid="uid://dw2ha1o0msr7w" path="res://assets/materials/notes/long.tres" id="1_j72ma"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_10c2w"]
+material = ExtResource("1_j72ma")
+size = Vector2(1, 0.5)
+
+[node name="long" type="MeshInstance3D"]
+mesh = SubResource("PlaneMesh_10c2w")

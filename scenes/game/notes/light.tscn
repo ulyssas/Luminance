@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://di4qgar8p7114"]
+
+[ext_resource type="Material" uid="uid://crhaekhq37sf0" path="res://assets/materials/notes/light.tres" id="1_ivkai"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_uyinl"]
+material = ExtResource("1_ivkai")
+size = Vector2(1, 0.5)
+
+[node name="light" type="MeshInstance3D"]
+mesh = SubResource("PlaneMesh_uyinl")

@@ -10,6 +10,7 @@ var current_state = SelectState.State.SELECT_TRACKS
 var music_datas: Array[MusicData]
 var music_index: int = 0
 var level_index: int = 0 # 0~3
+var lock_level: bool = false
 
 func set_music_datas(data: Array[MusicData]):
     music_datas = data
@@ -107,10 +108,10 @@ func _unhandled_input(event):
             SelectState.State.SELECT_TRACKS:
                 current_state = SelectState.State.SELECT_LEVELS
             SelectState.State.SELECT_LEVELS:
-                AudioManager.play_se(enter_se)
-                # $Cursor.trigger_spin()とか 待ってからシーン切り替えにすべき
-                # update_state()
-                load_game_scene()
+                if !lock_level:
+                    lock_level = true
+                    AudioManager.play_se(enter_se)
+                    load_game_scene()
         update_state()
 
     elif event.is_action_pressed("lane_1"):

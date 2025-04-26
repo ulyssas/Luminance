@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dspmlqhxvnxt6"]
+
+[ext_resource type="Material" uid="uid://bktfdg5w3dtc1" path="res://assets/materials/notes/dark.tres" id="1_u5tra"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pg2xm"]
+material = ExtResource("1_u5tra")
+size = Vector2(1, 0.5)
+
+[node name="dark" type="MeshInstance3D"]
+mesh = SubResource("PlaneMesh_pg2xm")

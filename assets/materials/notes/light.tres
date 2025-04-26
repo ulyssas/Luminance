@@ -8,5 +8,5 @@ alpha_scissor_threshold = 0.3
 alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_40ipk")
 emission_enabled = true
-emission_energy_multiplier = 0.5
+emission_energy_multiplier = 1.5
 emission_texture = ExtResource("1_40ipk")

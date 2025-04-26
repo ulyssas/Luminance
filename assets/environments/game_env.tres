@@ -1,14 +1,10 @@
-[gd_resource type="Environment" load_steps=3 format=3 uid="uid://s3h2fiao72e8"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vheqa"]
-
-[sub_resource type="Sky" id="Sky_rtht6"]
-sky_material = SubResource("ProceduralSkyMaterial_vheqa")
+[gd_resource type="Environment" format=3 uid="uid://s3h2fiao72e8"]
 
 [resource]
-background_mode = 2
-sky = SubResource("Sky_rtht6")
+background_mode = 1
+background_color = Color(0.15, 0.15, 0.15, 1)
 tonemap_exposure = 0.8
+ssil_enabled = true
 glow_enabled = true
 glow_normalized = true
 glow_intensity = 0.4

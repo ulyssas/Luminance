@@ -1,5 +1,9 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://bt4lrgtkxswyh"]
 
 [resource]
-albedo_color = Color(0, 0, 0, 1)
-refraction_scale = -0.2
+albedo_color = Color(0, 0, 0, 0.960784)
+metallic_specular = 0.65
+roughness = 0.77
+backlight = Color(0.253843, 0.253843, 0.253843, 1)
+refraction_enabled = true
+refraction_scale = 0.06

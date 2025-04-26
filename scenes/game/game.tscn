@@ -2,42 +2,44 @@
 
 [ext_resource type="Script" uid="uid://bypb1sdiirsia" path="res://scenes/game/game_scene.gd" id="1_87uf6"]
 [ext_resource type="Material" uid="uid://bklm14s88glwr" path="res://assets/materials/white.tres" id="2_87uf6"]
-[ext_resource type="Material" uid="uid://bt4lrgtkxswyh" path="res://assets/materials/black.tres" id="2_bdhmt"]
 [ext_resource type="Environment" uid="uid://s3h2fiao72e8" path="res://assets/environments/game_env.tres" id="3_0sr1o"]
 [ext_resource type="Script" uid="uid://613jygt6y5jb" path="res://scenes/game/debug_camera.gd" id="3_2a8rs"]
 [ext_resource type="Script" uid="uid://bf4r1dju2unyx" path="res://scenes/game/testcube.gd" id="4_5i0tg"]
 [ext_resource type="Script" uid="uid://r61y8fouan1q" path="res://scenes/game/lane_light.gd" id="4_bdhmt"]
+[ext_resource type="Shader" uid="uid://5f5js4al4270" path="res://assets/materials/blur.tres" id="4_otnwt"]
 [ext_resource type="PackedScene" uid="uid://yqks22vrlt8w" path="res://scenes/game/control.tscn" id="5_lfrn8"]
 [ext_resource type="Texture2D" uid="uid://clfv5oo5vw1vb" path="res://assets/images/gradient.tres" id="7_2a8rs"]
-[ext_resource type="Material" uid="uid://crhaekhq37sf0" path="res://assets/materials/notes/light.tres" id="9_ftsea"]
+[ext_resource type="PackedScene" uid="uid://di4qgar8p7114" path="res://scenes/game/notes/light.tscn" id="9_ftsea"]
 [ext_resource type="FontFile" uid="uid://dpnou6yjhysmb" path="res://assets/fonts/Roboto_Condensed/RobotoCondensed-Light.ttf" id="10_kp23o"]
-[ext_resource type="Material" uid="uid://tnnhqgprtoty" path="res://assets/materials/notes/notes.tres" id="10_otnwt"]
-[ext_resource type="Material" uid="uid://dw2ha1o0msr7w" path="res://assets/materials/notes/long.tres" id="11_3xj4h"]
-[ext_resource type="Material" uid="uid://bktfdg5w3dtc1" path="res://assets/materials/notes/dark.tres" id="12_5v6r0"]
+[ext_resource type="PackedScene" uid="uid://c4mccik67357d" path="res://scenes/game/notes/long.tscn" id="11_otnwt"]
+[ext_resource type="PackedScene" uid="uid://dspmlqhxvnxt6" path="res://scenes/game/notes/dark.tscn" id="12_3xj4h"]
+[ext_resource type="PackedScene" uid="uid://dsg042kjt4fx4" path="res://scenes/game/notes/note.tscn" id="12_otnwt"]
+[ext_resource type="Texture2D" uid="uid://cmvsxsdfnnham" path="res://assets/images/background.png" id="13_ftsea"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ftsea"]
+render_priority = 0
+shader = ExtResource("4_otnwt")
+shader_parameter/blur_amount = 6.696
+shader_parameter/mix_amount = 0.637
+shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_kelw5"]
-material = ExtResource("2_bdhmt")
+material = SubResource("ShaderMaterial_ftsea")
 
 [sub_resource type="BoxMesh" id="BoxMesh_2a8rs"]
 material = ExtResource("2_87uf6")
 
 [sub_resource type="BoxMesh" id="BoxMesh_lfrn8"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_uyinl"]
-material = ExtResource("9_ftsea")
-size = Vector2(1, 0.5)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_otnwt"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission_energy_multiplier = 16.0
+emission_texture = ExtResource("13_ftsea")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_5jirj"]
-material = ExtResource("10_otnwt")
-size = Vector2(1, 0.5)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_10c2w"]
-material = ExtResource("11_3xj4h")
-size = Vector2(1, 0.5)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_pg2xm"]
-material = ExtResource("12_5v6r0")
-size = Vector2(1, 0.5)
+[sub_resource type="PlaneMesh" id="PlaneMesh_3xj4h"]
+material = SubResource("StandardMaterial3D_otnwt")
+size = Vector2(16, 9)
 
 [node name="GameScene" type="Node"]
 script = ExtResource("1_87uf6")
@@ -49,6 +51,8 @@ environment = ExtResource("3_0sr1o")
 
 [node name="Sun" type="DirectionalLight3D" parent="3DScene"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5, 0)
+visible = false
+light_color = Color(0.52312, 0.52312, 0.52312, 1)
 
 [node name="Camera" type="Camera3D" parent="3DScene"]
 transform = Transform3D(-1, -7.33189e-08, 4.76138e-08, -2.40853e-08, 0.754618, 0.656165, -8.40395e-08, 0.656165, -0.754618, 0, 3.57463, -1.55602)
@@ -165,37 +169,36 @@ script = ExtResource("4_5i0tg")
 
 [node name="Notes" type="Node3D" parent="3DScene/Objects"]
 
-[node name="light" type="MeshInstance3D" parent="3DScene/Objects/Notes"]
-transform = Transform3D(-1.2, 0, -1.04907e-07, 0, 1, 0, 1.04907e-07, 0, -1.2, 2.6, 0.18, 0)
-mesh = SubResource("PlaneMesh_uyinl")
+[node name="light" parent="3DScene/Objects/Notes" instance=ExtResource("9_ftsea")]
+transform = Transform3D(-1.2, 0, -1.81195e-07, 0, 1, 0, 1.81195e-07, 0, -1.2, 2.6, 0.18, 0)
 
-[node name="note1" type="MeshInstance3D" parent="3DScene/Objects/Notes"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.5, 0.18, 0)
-mesh = SubResource("PlaneMesh_5jirj")
+[node name="note1" parent="3DScene/Objects/Notes" instance=ExtResource("12_otnwt")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 1.5, 0.18, 0)
 
-[node name="long" type="MeshInstance3D" parent="3DScene/Objects/Notes"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5, 0.18, 0)
-mesh = SubResource("PlaneMesh_10c2w")
+[node name="long" parent="3DScene/Objects/Notes" instance=ExtResource("11_otnwt")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0.5, 0.18, 0)
 
-[node name="note2" type="MeshInstance3D" parent="3DScene/Objects/Notes"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.5, 0.18, 0)
-mesh = SubResource("PlaneMesh_5jirj")
+[node name="note2" parent="3DScene/Objects/Notes" instance=ExtResource("12_otnwt")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -0.5, 0.18, 0)
 
-[node name="note3" type="MeshInstance3D" parent="3DScene/Objects/Notes"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.5, 0.18, 0)
-mesh = SubResource("PlaneMesh_5jirj")
+[node name="note3" parent="3DScene/Objects/Notes" instance=ExtResource("12_otnwt")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -1.5, 0.18, 0)
 
-[node name="dark" type="MeshInstance3D" parent="3DScene/Objects/Notes"]
-transform = Transform3D(-1.2, 0, -1.04907e-07, 0, 1, 0, 1.04907e-07, 0, -1.2, -2.6, 0.18, 0)
-mesh = SubResource("PlaneMesh_pg2xm")
+[node name="dark" parent="3DScene/Objects/Notes" instance=ExtResource("12_3xj4h")]
+transform = Transform3D(-1.2, 0, -1.81195e-07, 0, 1, 0, 1.81195e-07, 0, -1.2, -2.6, 0.18, 0)
 
 [node name="Label3D" type="Label3D" parent="3DScene/Objects"]
-transform = Transform3D(-1, 8.74228e-08, -1.04251e-15, 0, 1.19249e-08, 1, 8.74228e-08, 1, -1.19249e-08, 0, 0.18, 2)
+transform = Transform3D(-1, 8.74228e-08, -1.04251e-15, 0, 1.19249e-08, 1, 8.74228e-08, 1, -1.19249e-08, 0, 0.16, 2)
+render_priority = 10
 modulate = Color(1, 0.810667, 0.29, 1)
 outline_modulate = Color(0, 0, 0, 0)
 text = "Perfect
 36"
 font = ExtResource("10_kp23o")
 font_size = 256
+
+[node name="Backplate" type="MeshInstance3D" parent="3DScene/Objects"]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, -0.5, 0)
+mesh = SubResource("PlaneMesh_3xj4h")
 
 [node name="Control" parent="." instance=ExtResource("5_lfrn8")]
