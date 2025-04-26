@@ -1,4 +1,6 @@
 # Luminance
+<img src="icon.png" width="128" />
+
 イルミナス(Illuminas)やSparebeatを基にして作られた音ゲーです。
 
 ## 特徴

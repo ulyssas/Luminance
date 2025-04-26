@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://dbchwow8vo7wt" path="res://assets/sounds/Enter.mp3" id="2_4vmql"]
 [ext_resource type="Script" uid="uid://chk8pwdpfh8" path="res://scenes/select/level_select.gd" id="2_bk0it"]
 [ext_resource type="Theme" uid="uid://6545ddaa84em" path="res://assets/themes/fonts/roboto_regular.tres" id="2_fgw6a"]
-[ext_resource type="PackedScene" uid="uid://p6rexl0qlgxw" path="res://scenes/select/level.tscn" id="2_vcnt6"]
+[ext_resource type="PackedScene" uid="uid://p6rexl0qlgxw" path="res://scenes/select/item.tscn" id="2_vcnt6"]
 [ext_resource type="PackedScene" uid="uid://b8e7jmw45nr62" path="res://scenes/game/game.tscn" id="2_w2jup"]
 [ext_resource type="AudioStream" uid="uid://wtqyub3rtymy" path="res://assets/sounds/Select.mp3" id="3_a3vff"]
 [ext_resource type="Script" uid="uid://b3gpdtll10fpi" path="res://scenes/select/script_control/control.gd" id="3_e4mok"]
@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://ce2ax6kdcdopn" path="res://assets/images/reference/IlluminasLevels.png" id="3_vk38d"]
 [ext_resource type="Texture2D" uid="uid://cmvsxsdfnnham" path="res://assets/images/background.png" id="3_xv8n3"]
 [ext_resource type="StyleBox" uid="uid://ci86n3cbim3j" path="res://assets/themes/round_rect_black.tres" id="5_vjb3t"]
-[ext_resource type="Shader" uid="uid://bnmn2qcshrgku" path="res://assets/themes/drop_shadow.gdshader" id="6_rwp4l"]
+[ext_resource type="Shader" uid="uid://bnmn2qcshrgku" path="res://assets/themes/frost.gdshader" id="6_rwp4l"]
 [ext_resource type="Script" uid="uid://chtdvbqw36ahc" path="res://scenes/select/script_control/scroller.gd" id="7_e4mok"]
 [ext_resource type="Theme" uid="uid://bw8thsr5q4qyh" path="res://assets/themes/fonts/koruri_regular.tres" id="7_i6xpm"]
 [ext_resource type="Script" uid="uid://dl7grciajpxm0" path="res://scenes/select/script_control/music_info.gd" id="7_o55a0"]
@@ -281,21 +281,50 @@ script = ExtResource("2_bk0it")
 
 [node name="easy" parent="Control/LevelSelect/Container" instance=ExtResource("2_vcnt6")]
 layout_mode = 2
-level_name = "Easy"
 
 [node name="medium" parent="Control/LevelSelect/Container" instance=ExtResource("2_vcnt6")]
 layout_mode = 2
-level_name = "Medium"
 
 [node name="hard" parent="Control/LevelSelect/Container" instance=ExtResource("2_vcnt6")]
 layout_mode = 2
-level_name = "Hard"
 
 [node name="kuso" parent="Control/LevelSelect/Container" instance=ExtResource("2_vcnt6")]
 layout_mode = 2
-level_name = "Kuso"
 
 [node name="Cursor" parent="Control/LevelSelect" instance=ExtResource("23_a8ep5")]
+
+[node name="OptionSelect" type="Control" parent="Control"]
+layout_mode = 1
+anchor_top = 0.725
+anchor_right = 1.0
+anchor_bottom = 0.934
+offset_bottom = 0.279968
+script = ExtResource("18_xr1oa")
+
+[node name="Container" type="HBoxContainer" parent="Control/OptionSelect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+script = ExtResource("2_bk0it")
+
+[node name="speed" parent="Control/OptionSelect/Container" instance=ExtResource("2_vcnt6")]
+layout_mode = 2
+item_value = "6"
+
+[node name="offset" parent="Control/OptionSelect/Container" instance=ExtResource("2_vcnt6")]
+layout_mode = 2
+item_value = "±0"
+
+[node name="AIR" parent="Control/OptionSelect/Container" instance=ExtResource("2_vcnt6")]
+layout_mode = 2
+item_value = "On"
+
+[node name="Cursor" parent="Control/OptionSelect" instance=ExtResource("23_a8ep5")]
 
 [node name="BottomBar" type="Control" parent="Control"]
 layout_mode = 1

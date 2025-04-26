@@ -15,7 +15,7 @@ config/description="A rhythm game."
 config/version="0.1"
 run/main_scene="uid://64pmmemfbiv3"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="uid://df3emkxny4p8x"
+config/icon="uid://cyr3e4agey4ls"
 
 [autoload]
 

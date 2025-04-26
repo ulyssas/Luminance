@@ -86,6 +86,9 @@ func load_game_scene():
         push_warning("指定されたレベル（%s）は存在しません" % target_level_name)
         return
 
+    # 操作をロックする
+    lock_level = true
+
     # フェードアウト
     Fade.fade_out(0.5)
 
@@ -100,35 +103,35 @@ func load_game_scene():
     )
 
 func _unhandled_input(event):
-    if event.is_action_pressed("confirm"):
-        AudioManager.play_se(enter_se)
-        match current_state:
-            SelectState.State.OPTIONS:
-                pass
-            SelectState.State.SELECT_TRACKS:
-                current_state = SelectState.State.SELECT_LEVELS
-            SelectState.State.SELECT_LEVELS:
-                if !lock_level:
-                    lock_level = true
+    if !lock_level:
+        if event.is_action_pressed("confirm"):
+            AudioManager.play_se(enter_se)
+            match current_state:
+                SelectState.State.OPTIONS:
+                    pass
+                SelectState.State.SELECT_TRACKS:
+                    current_state = SelectState.State.SELECT_LEVELS
+                SelectState.State.SELECT_LEVELS:
+                    
                     AudioManager.play_se(enter_se)
                     load_game_scene()
-        update_state()
+            update_state()
 
-    elif event.is_action_pressed("lane_1"):
-        match current_state:
-            SelectState.State.OPTIONS:
-                AudioManager.play_se(enter_se)
-                current_state = SelectState.State.SELECT_LEVELS
-            SelectState.State.SELECT_LEVELS:
-                AudioManager.play_se(enter_se)
-                current_state = SelectState.State.SELECT_TRACKS
-        update_state()
+        elif event.is_action_pressed("lane_1"):
+            match current_state:
+                SelectState.State.OPTIONS:
+                    AudioManager.play_se(enter_se)
+                    current_state = SelectState.State.SELECT_LEVELS
+                SelectState.State.SELECT_LEVELS:
+                    AudioManager.play_se(enter_se)
+                    current_state = SelectState.State.SELECT_TRACKS
+            update_state()
 
-    elif event.is_action_pressed("lane_4"):
-        match current_state:
-            SelectState.State.OPTIONS:
-                pass
-            SelectState.State.SELECT_LEVELS:
-                AudioManager.play_se(enter_se)
-                current_state = SelectState.State.OPTIONS
-        update_state()
+        elif event.is_action_pressed("lane_4"):
+            match current_state:
+                SelectState.State.OPTIONS:
+                    pass
+                SelectState.State.SELECT_LEVELS:
+                    AudioManager.play_se(enter_se)
+                    current_state = SelectState.State.OPTIONS
+            update_state()
