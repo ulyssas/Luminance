@@ -29,7 +29,7 @@ func trigger_spin():
 
     tween = create_tween()
 
-    var rotate1 = deg_to_rad(80)
+    var rotate1 = deg_to_rad(90)
     var rotate2 = deg_to_rad(360)
 
     part1.rotation = rotate1

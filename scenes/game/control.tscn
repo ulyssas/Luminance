@@ -8,7 +8,7 @@
 [ext_resource type="Theme" uid="uid://chqbd3w2yx3lv" path="res://assets/themes/fonts/latego_regular_tight.tres" id="4_ti084"]
 [ext_resource type="Script" uid="uid://b1mcf62cl22kp" path="res://scenes/game/script_control/music_info.gd" id="5_yvurm"]
 [ext_resource type="StyleBox" uid="uid://bjbfe8qwcb66r" path="res://assets/themes/round_rect_inverted.tres" id="6_v8rs5"]
-[ext_resource type="Texture2D" uid="uid://df3emkxny4p8x" path="res://icon.png" id="6_yvurm"]
+[ext_resource type="Texture2D" uid="uid://cyr3e4agey4ls" path="res://icon.png" id="6_yvurm"]
 [ext_resource type="StyleBox" uid="uid://b1t68e2jrkv2f" path="res://assets/themes/progress_bar.tres" id="7_yvurm"]
 [ext_resource type="StyleBox" uid="uid://cax5a5nhhpcms" path="res://assets/themes/round_rect_transparent.tres" id="8_if1kv"]
 [ext_resource type="Theme" uid="uid://d3sou6vesd0am" path="res://assets/themes/fonts/latego_regular.tres" id="9_0ccww"]

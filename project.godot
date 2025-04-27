@@ -16,6 +16,8 @@ config/version="0.1"
 run/main_scene="uid://64pmmemfbiv3"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://cyr3e4agey4ls"
+config/macos_native_icon="res://assets/images/icons/luminance.icns"
+config/windows_native_icon="res://assets/images/icons/luminance.ico"
 
 [autoload]
 
@@ -79,5 +81,6 @@ exit={
 
 [rendering]
 
+textures/vram_compression/import_etc2_astc=true
 anti_aliasing/quality/msaa_3d=1
 anti_aliasing/quality/use_debanding=true

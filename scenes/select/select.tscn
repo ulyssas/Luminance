@@ -80,9 +80,9 @@ script = ExtResource("3_e4mok")
 
 [node name="MusicSelect" parent="Control" instance=ExtResource("12_4gfkc")]
 layout_mode = 1
-offset_left = -380.0
+offset_left = -450.0
 offset_top = 300.0
-offset_right = -380.0
+offset_right = -450.0
 offset_bottom = -443.0
 
 [node name="fade" type="ColorRect" parent="Control"]
