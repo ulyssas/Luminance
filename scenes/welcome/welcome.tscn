@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://dlok0dv1tq2bf" path="res://addons/markdownlabel/header_formats/h3_format.gd" id="5_3lerr"]
 [ext_resource type="Texture2D" uid="uid://bm16ybdrhrj41" path="res://assets/images/title.png" id="5_ghlg0"]
 [ext_resource type="Script" uid="uid://bayuh2vafablg" path="res://addons/markdownlabel/header_formats/h4_format.gd" id="6_18vpa"]
+[ext_resource type="FontFile" uid="uid://d0r4y3b3gs50n" path="res://assets/fonts/Koruri/Koruri-Semibold.ttf" id="6_p3j67"]
+[ext_resource type="FontFile" uid="uid://bow4145lgd6t0" path="res://assets/fonts/Koruri/Koruri-Extrabold.ttf" id="7_20rhv"]
 [ext_resource type="Script" uid="uid://dfr1w7u3jgni3" path="res://addons/markdownlabel/header_formats/h5_format.gd" id="7_lab8k"]
 [ext_resource type="Script" uid="uid://bsi6dexoofpe6" path="res://addons/markdownlabel/header_formats/h6_format.gd" id="8_hxxw2"]
 
@@ -73,12 +75,6 @@ is_underlined = false
 override_font_color = false
 font_color = Color(1, 1, 1, 1)
 
-[sub_resource type="InputEventAction" id="InputEventAction_em5qb"]
-action = &"confirm"
-
-[sub_resource type="Shortcut" id="Shortcut_ghlg0"]
-events = [SubResource("InputEventAction_em5qb")]
-
 [node name="welcome" type="Node"]
 script = ExtResource("1_cgoi3")
 game_scene = ExtResource("2_r16cy")
@@ -117,22 +113,25 @@ offset_right = -110.0
 offset_bottom = 227.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/line_separation = 8
+theme_override_fonts/normal_font = ExtResource("6_p3j67")
+theme_override_fonts/bold_font = ExtResource("7_20rhv")
 theme_override_font_sizes/normal_font_size = 30
 theme_override_font_sizes/bold_font_size = 39
 bbcode_enabled = true
 text = "
 
 Luminance is a rhythm game.
-
-You can add musics in the [b]musics[/b] folder."
+You can add musics in the [b]musics[/b] folder.
+press [b]Enter[/b] to continue."
 scroll_following = true
 horizontal_alignment = 1
 script = ExtResource("2_4co5k")
 markdown_text = "
 
 Luminance is a rhythm game.
-
-You can add musics in the **musics** folder."
+You can add musics in the **musics** folder.
+press **Enter** to continue."
 h1 = SubResource("Resource_knq72")
 h2 = SubResource("Resource_xvdhi")
 h3 = SubResource("Resource_oq4si")
@@ -141,7 +140,7 @@ h5 = SubResource("Resource_pi4e7")
 h6 = SubResource("Resource_kuuv8")
 metadata/_custom_type_script = "uid://dbap0gqox0ty1"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="Buttons" type="HBoxContainer" parent="."]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -153,45 +152,31 @@ offset_bottom = -210.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="spacer2" type="Control" parent="HBoxContainer"]
+[node name="spacer2" type="Control" parent="Buttons"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="game_open" type="Button" parent="HBoxContainer"]
+[node name="game_open" type="Button" parent="Buttons"]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Enter the game"
+text = "Skip select scene"
 
-[node name="spacer" type="Control" parent="HBoxContainer"]
+[node name="spacer" type="Control" parent="Buttons"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 
-[node name="select_open" type="Button" parent="HBoxContainer"]
+[node name="folder_open" type="Button" parent="Buttons"]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-action_mode = 0
-shortcut = SubResource("Shortcut_ghlg0")
-shortcut_in_tooltip = false
-text = "Select screen"
+text = "Open user folder"
 
-[node name="spacer4" type="Control" parent="HBoxContainer"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-
-[node name="folder_open" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(300, 100)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Open the folder"
-
-[node name="spacer3" type="Control" parent="HBoxContainer"]
+[node name="spacer3" type="Control" parent="Buttons"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[connection signal="button_up" from="HBoxContainer/game_open" to="." method="_on_game_open_button_up"]
-[connection signal="button_up" from="HBoxContainer/select_open" to="." method="_on_select_open_button_up"]
-[connection signal="button_up" from="HBoxContainer/folder_open" to="." method="_on_folder_open_button_up"]
+[connection signal="button_up" from="Buttons/game_open" to="." method="_on_game_open_button_up"]
+[connection signal="button_up" from="Buttons/folder_open" to="." method="_on_folder_open_button_up"]

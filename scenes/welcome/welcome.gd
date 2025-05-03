@@ -34,8 +34,11 @@ func _on_game_open_button_up():
     get_tree().current_scene.queue_free()
     get_tree().current_scene = game_instance
 
+func _unhandled_input(event):
+    if event.is_action_pressed("confirm"):
+        open_select()
 
-func _on_select_open_button_up():
+func open_select():
     """`select` を開く"""
     if select_scene == null:
         push_warning("シーンが設定されていません")

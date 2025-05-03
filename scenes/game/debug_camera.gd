@@ -15,4 +15,4 @@ func _process(delta):
     if direction.length() > 0:
         direction = direction.normalized() * speed
 
-    #position += direction * delta
+    position += direction * delta
